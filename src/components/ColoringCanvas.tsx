@@ -36,6 +36,8 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const [historyStep, setHistoryStep] = useState(-1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showPalette, setShowPalette] = useState(false);
+  const [savedCanvasState, setSavedCanvasState] = useState<string | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -70,6 +72,16 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
       
       canvas.backgroundImage = img;
       canvas.renderAll();
+      
+      // Restaurar estado salvo se existir
+      if (savedCanvasState) {
+        setTimeout(() => {
+          const state = JSON.parse(savedCanvasState);
+          canvas.loadFromJSON(state).then(() => {
+            canvas.renderAll();
+          });
+        }, 100);
+      }
     });
 
     // Initialize brush
@@ -80,14 +92,16 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
 
     setFabricCanvas(canvas);
 
-    // Save initial state
-    setTimeout(() => {
-      if (canvas) {
-        const initialState = canvas.toJSON();
-        setCanvasHistory([JSON.stringify(initialState)]);
-        setHistoryStep(0);
-      }
-    }, 500);
+    // Save initial state only if there's no saved state
+    if (!savedCanvasState) {
+      setTimeout(() => {
+        if (canvas) {
+          const initialState = canvas.toJSON();
+          setCanvasHistory([JSON.stringify(initialState)]);
+          setHistoryStep(0);
+        }
+      }, 500);
+    }
 
     // Add event listener to save state after drawing
     canvas.on('path:created', () => {
@@ -97,7 +111,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
     return () => {
       canvas.dispose();
     };
-  }, [imageUrl, isFullscreen]);
+  }, [imageUrl, isFullscreen, savedCanvasState]);
 
   useEffect(() => {
     if (!fabricCanvas) return;
@@ -370,6 +384,35 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
     toast.success("🎉 Parabéns! Que desenho lindo!");
   };
 
+  const handleToggleFullscreen = () => {
+    if (!fabricCanvas) return;
+    
+    // Salvar o estado atual antes de mudar
+    const currentState = JSON.stringify(fabricCanvas.toJSON());
+    setSavedCanvasState(currentState);
+    
+    setIsFullscreen(!isFullscreen);
+  };
+
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.2, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.2, 0.5));
+  };
+
+  const handleZoomReset = () => {
+    setZoomLevel(1);
+  };
+
+  useEffect(() => {
+    if (fabricCanvas && isFullscreen) {
+      fabricCanvas.setZoom(zoomLevel);
+      fabricCanvas.renderAll();
+    }
+  }, [zoomLevel, fabricCanvas, isFullscreen]);
+
   const handlePrint = () => {
     if (!fabricCanvas) return;
     
@@ -493,7 +536,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
         <Button
           size="lg"
           variant="outline"
-          onClick={() => setIsFullscreen(true)}
+          onClick={handleToggleFullscreen}
           className="touch-manipulation"
         >
           <Maximize2 className="w-5 h-5 mr-2" />
@@ -520,7 +563,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
             Finalizar
           </Button>
         )}
-      </div>
+       </div>
 
       {/* Brush Size */}
       {activeTool !== "fill" && (
@@ -653,14 +696,43 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
           <Button
             size="sm"
             variant="ghost"
-            onClick={() => setIsFullscreen(false)}
+            onClick={handleToggleFullscreen}
             className="touch-manipulation"
           >
             <X className="w-5 h-5" />
           </Button>
         </div>
         
-        {/* Brush Size */}
+        {/* Zoom Controls */}
+        <div className="flex items-center gap-2 justify-center py-2 px-4 border-b border-border">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleZoomOut}
+            className="touch-manipulation"
+          >
+            <span className="text-lg">-</span>
+          </Button>
+          <span className="text-sm font-medium min-w-[80px] text-center">
+            Zoom: {Math.round(zoomLevel * 100)}%
+          </span>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleZoomIn}
+            className="touch-manipulation"
+          >
+            <span className="text-lg">+</span>
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleZoomReset}
+            className="touch-manipulation"
+          >
+            Reset
+          </Button>
+        </div>
         {activeTool !== "fill" && (
           <div className="flex items-center gap-3 justify-center py-2 px-4 border-b border-border">
             <label className="text-sm font-medium">Tamanho:</label>
