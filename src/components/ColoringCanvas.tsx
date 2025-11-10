@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Canvas as FabricCanvas, PencilBrush, FabricImage } from "fabric";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Eraser, Download, RotateCcw, Pencil, PaintBucket, Sparkles, Printer, Undo2, Redo2, Maximize2, X, Palette } from "lucide-react";
+import { Eraser, Download, RotateCcw, Pencil, PaintBucket, Sparkles, Printer, Undo2, Redo2 } from "lucide-react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 
@@ -25,7 +25,6 @@ const COLORS = [
 export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const fullscreenContainerRef = useRef<HTMLDivElement>(null);
   const [fabricCanvas, setFabricCanvas] = useState<FabricCanvas | null>(null);
   const [activeColor, setActiveColor] = useState("#FF0000");
   const [activeTool, setActiveTool] = useState<"draw" | "erase" | "fill">("draw");
@@ -34,17 +33,13 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const [isFinished, setIsFinished] = useState(false);
   const [canvasHistory, setCanvasHistory] = useState<string[]>([]);
   const [historyStep, setHistoryStep] = useState(-1);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showPalette, setShowPalette] = useState(false);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-    
-    const container = isFullscreen ? fullscreenContainerRef.current : containerRef.current;
-    if (!container) return;
+    if (!canvasRef.current || !containerRef.current) return;
 
-    const maxWidth = Math.min(container.clientWidth - 32, isFullscreen ? 1200 : 800);
-    const maxHeight = isFullscreen ? window.innerHeight - 200 : 600;
+    const container = containerRef.current;
+    const maxWidth = Math.min(container.clientWidth - 32, 800);
+    const maxHeight = 600;
 
     const canvas = new FabricCanvas(canvasRef.current, {
       width: maxWidth,
@@ -97,7 +92,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
     return () => {
       canvas.dispose();
     };
-  }, [imageUrl, isFullscreen]);
+  }, [imageUrl]);
 
   useEffect(() => {
     if (!fabricCanvas) return;
@@ -408,9 +403,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   };
 
   return (
-    <>
-    {!isFullscreen && (
-      <Card className="p-4 space-y-4">
+    <Card className="p-4 space-y-4">
       {/* Tools */}
       <div className="flex flex-wrap gap-2 items-center justify-center">
         <Button
@@ -478,15 +471,6 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
           <Download className="w-5 h-5 mr-2" />
           Baixar
         </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          onClick={() => setIsFullscreen(true)}
-          className="touch-manipulation"
-        >
-          <Maximize2 className="w-5 h-5 mr-2" />
-          Expandir
-        </Button>
         {isFinished && (
           <Button
             size="lg"
@@ -544,176 +528,24 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
       )}
 
       {/* Canvas */}
-      {!isFullscreen && (
-        <div 
-          ref={containerRef}
-          className={`flex justify-center items-center bg-background rounded-lg border-2 border-border overflow-visible touch-manipulation transition-all duration-500 ${
-            isFinished ? "shadow-2xl shadow-primary/50" : ""
-          }`}
-          style={{ touchAction: "none" }}
-        >
-          <canvas 
-            ref={canvasRef}
-          />
-        </div>
-      )}
+      <div 
+        ref={containerRef}
+        className={`flex justify-center items-center bg-background rounded-lg border-2 border-border overflow-visible touch-manipulation transition-all duration-500 ${
+          isFinished ? "shadow-2xl shadow-primary/50" : ""
+        }`}
+        style={{ touchAction: "none" }}
+      >
+        <canvas 
+          ref={canvasRef}
+        />
+      </div>
       
-      {isFinished && !isFullscreen && (
+      {isFinished && (
         <div className="text-center animate-fade-in">
           <h2 className="text-3xl font-bold text-primary mb-2">🎨 Obra-prima finalizada! 🎉</h2>
           <p className="text-muted-foreground text-lg">Você é um artista incrível!</p>
         </div>
       )}
     </Card>
-    )}
-    
-    {/* Fullscreen Mode */}
-    {isFullscreen && (
-      <div className="fixed inset-0 z-[9999] bg-background flex flex-col">
-        {/* Header with tools */}
-        <div className="flex items-center justify-between gap-2 p-3 border-b border-border flex-wrap">
-          <div className="flex items-center gap-2 flex-wrap">
-            <Button
-              size="sm"
-              variant={activeTool === "draw" ? "default" : "outline"}
-              onClick={() => setActiveTool("draw")}
-              className="touch-manipulation"
-            >
-              <Pencil className="w-4 h-4 mr-1" />
-              Pincel
-            </Button>
-            <Button
-              size="sm"
-              variant={activeTool === "fill" ? "default" : "outline"}
-              onClick={() => setActiveTool("fill")}
-              className="touch-manipulation"
-            >
-              <PaintBucket className="w-4 h-4 mr-1" />
-              Balde
-            </Button>
-            <Button
-              size="sm"
-              variant={activeTool === "erase" ? "default" : "outline"}
-              onClick={() => setActiveTool("erase")}
-              className="touch-manipulation"
-            >
-              <Eraser className="w-4 h-4 mr-1" />
-              Borracha
-            </Button>
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={() => setShowPalette(!showPalette)}
-              className="touch-manipulation"
-            >
-              <Palette className="w-4 h-4 mr-1" />
-              Cores
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={handleUndo}
-              disabled={historyStep <= 0}
-              className="touch-manipulation"
-            >
-              <Undo2 className="w-4 h-4" />
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={handleRedo}
-              disabled={historyStep >= canvasHistory.length - 1}
-              className="touch-manipulation"
-            >
-              <Redo2 className="w-4 h-4" />
-            </Button>
-            {!isFinished && (
-              <Button
-                size="sm"
-                onClick={handleFinish}
-                className="touch-manipulation bg-gradient-to-r from-primary to-purple-600"
-              >
-                <Sparkles className="w-4 h-4 mr-1" />
-                Finalizar
-              </Button>
-            )}
-          </div>
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={() => setIsFullscreen(false)}
-            className="touch-manipulation"
-          >
-            <X className="w-5 h-5" />
-          </Button>
-        </div>
-        
-        {/* Brush Size */}
-        {activeTool !== "fill" && (
-          <div className="flex items-center gap-3 justify-center py-2 px-4 border-b border-border">
-            <label className="text-sm font-medium">Tamanho:</label>
-            <input
-              type="range"
-              min="5"
-              max="30"
-              value={brushSize}
-              onChange={(e) => setBrushSize(Number(e.target.value))}
-              className="w-32 md:w-48 touch-manipulation"
-            />
-            <span className="text-sm font-bold w-8">{brushSize}</span>
-          </div>
-        )}
-        
-        {/* Canvas Area - Full Screen */}
-        <div 
-          ref={fullscreenContainerRef}
-          className="flex-1 flex items-center justify-center bg-muted/30 p-4 overflow-auto relative"
-        >
-          <div 
-            className="flex justify-center items-center"
-            style={{ touchAction: "none" }}
-          >
-            <canvas 
-              ref={canvasRef}
-              className="max-w-full max-h-full shadow-2xl"
-            />
-          </div>
-        
-          {/* Floating Color Palette Popup */}
-          {showPalette && (activeTool === "draw" || activeTool === "fill") && (
-            <div className="absolute top-4 right-4 bg-card border-2 border-border rounded-xl p-4 shadow-2xl max-w-sm animate-fade-in">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="font-bold text-sm">Paleta de Cores</h4>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => setShowPalette(false)}
-                  className="h-6 w-6 p-0"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-              <div className="grid grid-cols-5 gap-2 max-h-64 overflow-y-auto">
-                {COLORS.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => {
-                      setActiveColor(color);
-                      setShowPalette(false);
-                    }}
-                    className={`w-12 h-12 rounded-lg border-4 transition-transform hover:scale-110 touch-manipulation ${
-                      activeColor === color ? "border-primary scale-110 shadow-lg" : "border-transparent"
-                    }`}
-                    style={{ backgroundColor: color }}
-                    aria-label={`Cor ${color}`}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    )}
-    </>
   );
 };
