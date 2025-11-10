@@ -69,19 +69,29 @@ export const FreeDrawCanvas = () => {
   useEffect(() => {
     if (!fabricCanvas) return;
 
+    // Sempre manter o modo de desenho ativado
     fabricCanvas.isDrawingMode = true;
+    fabricCanvas.selection = false; // Desabilita seleção de objetos
     
     if (activeTool === "draw") {
       const pencilBrush = new PencilBrush(fabricCanvas);
       pencilBrush.color = activeColor;
       pencilBrush.width = brushSize;
+      // Configurações importantes para evitar que o desenho desapareça
+      pencilBrush.strokeLineCap = 'round';
+      pencilBrush.strokeLineJoin = 'round';
       fabricCanvas.freeDrawingBrush = pencilBrush;
     } else {
       const eraserBrush = new PencilBrush(fabricCanvas);
       eraserBrush.color = "#FFFFFF";
       eraserBrush.width = brushSize * 2;
+      eraserBrush.strokeLineCap = 'round';
+      eraserBrush.strokeLineJoin = 'round';
       fabricCanvas.freeDrawingBrush = eraserBrush;
     }
+    
+    // Força o render para aplicar as mudanças
+    fabricCanvas.renderAll();
   }, [activeTool, activeColor, brushSize, fabricCanvas]);
 
   const saveCanvasState = (canvas: FabricCanvas) => {
