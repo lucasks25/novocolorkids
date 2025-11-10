@@ -46,31 +46,14 @@ export const FloatingChristianButton = ({ isChristianMode, onToggle }: FloatingC
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative">
               {!isChristianMode ? (
-                // Cruz para ATIVAR modo cristão
-                <div className="relative w-56 h-72 animate-symbol-entrance">
-                  {/* Cruz principal com gradiente dourado celestial */}
-                  <div className="absolute left-1/2 top-20 -translate-x-1/2 w-14 h-48 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-2xl shadow-2xl shadow-amber-400/60 animate-glow-pulse" 
-                       style={{ boxShadow: '0 0 60px rgba(251, 191, 36, 0.8), 0 0 120px rgba(251, 191, 36, 0.4), inset 0 2px 20px rgba(255, 255, 255, 0.5)' }} />
-                  <div className="absolute left-1/2 top-28 -translate-x-1/2 w-40 h-14 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 rounded-2xl shadow-2xl shadow-amber-400/60 animate-glow-pulse" 
-                       style={{ boxShadow: '0 0 60px rgba(251, 191, 36, 0.8), 0 0 120px rgba(251, 191, 36, 0.4), inset 0 2px 20px rgba(255, 255, 255, 0.5)' }} />
-                  
-                  {/* Raios de luz celestiais */}
-                  <div className="absolute inset-0 -z-10">
-                    {[...Array(24)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute left-1/2 top-1/2 origin-bottom"
-                        style={{
-                          width: '4px',
-                          height: '200px',
-                          background: `linear-gradient(to top, transparent, rgba(251, 191, 36, ${0.3 + (i % 3) * 0.15}), transparent)`,
-                          transform: `rotate(${i * 15}deg) translateY(-50%)`,
-                          animation: `ray-pulse 3s ease-in-out ${i * 0.08}s infinite`,
-                          filter: 'blur(1px)',
-                        }}
-                      />
-                    ))}
-                  </div>
+                // Cruz para ATIVAR modo cristão (simples e estável)
+                <div className="relative w-40 h-48">
+                  {/* Aura suave */}
+                  <div className="absolute inset-0 -z-10 rounded-full bg-gradient-radial from-amber-300/40 via-yellow-400/20 to-transparent blur-3xl animate-pulse" />
+                  {/* Cruz */}
+                  <div className="absolute left-1/2 top-10 -translate-x-1/2 w-10 h-36 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
+                  <div className="absolute left-1/2 top-20 -translate-x-1/2 w-28 h-10 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
+                </div>
                 </div>
               ) : (
                 // Paleta de pintura para VOLTAR ao modo normal
