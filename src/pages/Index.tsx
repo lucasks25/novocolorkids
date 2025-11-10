@@ -63,14 +63,14 @@ const Index = () => {
       <section className="container mx-auto px-3 md:px-4 py-8 md:py-16 text-center">
         <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
           {/* Badge de Eleito */}
-          <div className="inline-block">
-            <div className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold text-xs md:text-sm px-4 py-1.5 rounded-full shadow-lg">
-              ⭐ #1 em Desenhos Infantis 2025
+          <div className="inline-block animate-fade-in">
+            <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 text-black font-extrabold text-xs md:text-sm px-5 py-2 rounded-full shadow-xl border-2 border-yellow-600">
+              🏆 ELEITO O MELHOR DE 2025
             </div>
           </div>
 
           {/* Mascot Area */}
-          <div className="flex justify-center">
+          <div className="flex justify-center animate-scale-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
             <div className="relative">
               {isChristianMode ? (
                 // Cruz para modo cristão
@@ -97,14 +97,14 @@ const Index = () => {
           </div>
 
           <div className="space-y-4 md:space-y-6">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight px-2">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight px-2 animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "backwards" }}>
               {isChristianMode 
                 ? "Desenhos Cristãos para Colorir" 
                 : "Desenhos Mágicos para Crianças"
               }
             </h2>
             
-            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto px-4">
+            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto px-4 animate-fade-in" style={{ animationDelay: "0.6s", animationFillMode: "backwards" }}>
               {isChristianMode 
                 ? "Ensine valores eternos através da arte" 
                 : "Crie, imprima e divirta-se colorindo"
@@ -112,8 +112,8 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4 px-4">
-            <Button 
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4 px-4 animate-fade-in" style={{ animationDelay: "0.8s", animationFillMode: "backwards" }}>
+            <Button
               size="lg" 
               onClick={scrollToGenerator}
               className="text-base md:text-xl py-5 md:py-6 px-6 md:px-8 rounded-full shadow-lg hover:scale-105 transition-transform touch-manipulation"
