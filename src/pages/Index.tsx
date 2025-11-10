@@ -13,35 +13,11 @@ const Index = () => {
   const [isChristianMode, setIsChristianMode] = useState(false);
   const [isChristmasMode, setIsChristmasMode] = useState(false);
   const generatorRef = useRef<HTMLDivElement>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-christian-mode', String(isChristianMode));
     document.documentElement.setAttribute('data-christmas-mode', String(isChristmasMode));
   }, [isChristianMode, isChristmasMode]);
-
-  useEffect(() => {
-    // Play Christmas music when Christmas mode is active
-    if (isChristmasMode) {
-      if (!audioRef.current) {
-        audioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2993/2993-preview.mp3');
-        audioRef.current.loop = true;
-        audioRef.current.volume = 0.3;
-      }
-      audioRef.current.play().catch(err => console.log('Audio play failed:', err));
-    } else {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    }
-    
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-    };
-  }, [isChristmasMode]);
   
   const scrollToGenerator = () => {
     generatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -117,16 +93,16 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="container mx-auto px-3 md:px-4 py-2 md:py-4 text-center">
-        <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
-          {/* Badge de Eleito - Mais alto */}
-          <div className="inline-block animate-fade-in pt-2 md:pt-4">
+        <div className="max-w-3xl mx-auto space-y-6 md:space-y-10">
+          {/* Badge de Eleito - Mais alto e com mais margem */}
+          <div className="inline-block animate-fade-in pt-4 md:pt-6 pb-2">
             <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 text-black font-extrabold text-xs md:text-sm px-5 py-2 rounded-full shadow-xl border-2 border-yellow-600">
               🏆 ELEITO A MELHOR PLATAFORMA DE PINTURA DE 2025 🏆
             </div>
           </div>
 
-          {/* Mascot Area */}
-          <div className="flex justify-center animate-scale-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
+          {/* Mascot Area - com margem superior extra */}
+          <div className="flex justify-center animate-scale-in mt-4" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
             <div className="relative">
               {isChristmasMode ? (
                 // Árvore de Natal para modo natalino
