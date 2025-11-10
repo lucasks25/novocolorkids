@@ -120,6 +120,9 @@ useEffect(() => {
 
   return (
     <div className="space-y-6">
+      {/* Banner persistente */}
+      {statusMessage && <PersistentBanner message={statusMessage} position="top" />}
+      
       {/* Versículo Bíblico */}
       {showBibleVerse && <BibleVerseCard onClose={() => setShowBibleVerse(false)} />}
       <div className="text-center">

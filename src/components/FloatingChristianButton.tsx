@@ -47,13 +47,12 @@ export const FloatingChristianButton = ({ isChristianMode, onToggle }: FloatingC
             <div className="relative">
               {!isChristianMode ? (
                 // Cruz para ATIVAR modo cristão (simples e estável)
-                <div className="relative w-40 h-48">
+                <div className="relative w-40 h-48 animate-fade-in">
                   {/* Aura suave */}
                   <div className="absolute inset-0 -z-10 rounded-full bg-gradient-radial from-amber-300/40 via-yellow-400/20 to-transparent blur-3xl animate-pulse" />
                   {/* Cruz */}
                   <div className="absolute left-1/2 top-10 -translate-x-1/2 w-10 h-36 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
                   <div className="absolute left-1/2 top-20 -translate-x-1/2 w-28 h-10 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
-                </div>
                 </div>
               ) : (
                 // Paleta de pintura para VOLTAR ao modo normal
