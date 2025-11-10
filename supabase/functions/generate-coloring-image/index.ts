@@ -11,26 +11,36 @@ serve(async (req) => {
   }
 
   try {
-    const { category, isChristianMode } = await req.json();
-    console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode);
+    const { category, isChristianMode, difficulty = "easy" } = await req.json();
+    console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode, 'Difficulty:', difficulty);
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    // Christian prompts - DESENHOS INFANTIS FÁCEIS DE COLORIR - PRETO E BRANCO
-    const christianPrompts: Record<string, string> = {
+    // EASY MODE - Christian prompts
+    const christianPromptsEasy: Record<string, string> = {
       "Histórias Bíblicas": "BLACK AND WHITE COLORING PAGE ONLY! Create a simple biblical scene: Noah's Ark with 3-4 cute animals, young David with slingshot, Moses with staff, or Daniel with friendly lions. CRITICAL: Use ONLY pure black lines (#000000) on pure white background (#FFFFFF). EXTREMELY THICK outlines (8-10px width). NO GRAY TONES, NO SHADING, NO COLORS - only solid black lines. Large rounded shapes, big friendly eyes, simple cartoon faces. Maximum 4 elements total. Huge empty white spaces for coloring. Like a traditional kids coloring book page. Ages 3-7.",
       "Personagens da Bíblia": "BLACK AND WHITE COLORING PAGE ONLY! One simple biblical character: Jesus with kind smile, Mary with loving expression, Moses with simple robe, or shepherd boy David with one sheep. CRITICAL: ONLY pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO gray, NO colors whatsoever. Big round head, simple body, minimal clothing details, one basic accessory. Traditional coloring book style with thick black contours. Ages 3-7.",
       "Símbolos Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! One large, simple Christian symbol: basic cross (two thick rectangles), or simple praying hands outline, or basic dove shape, or large fish symbol. CRITICAL: Pure black lines ONLY (#000000) on white background (#FFFFFF). SUPER THICK outlines (10-12px). Absolutely NO decorations, NO patterns, NO shading, NO gray tones. Just one bold symbol taking up most of the page. Traditional coloring book format. Ages 3-7.",
-      "Versículos": "BLACK AND WHITE COLORING PAGE ONLY! Big simple text 'DEUS É AMOR' or 'JESUS ME AMA' in bubble letters with 4-5 large basic shapes around it: big heart, simple star, basic cross, round flower, cloud. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO patterns, NO shading, NO colors. Simple bold cartoon shapes. Traditional coloring book page. Ages 3-7.",
+      "Versículos": "BLACK AND WHITE COLORING PAGE ONLY! At the TOP of the page write in large bubble letters: 'João 3:16 - Porque Deus amou o mundo'. Below that, draw 4-5 large basic shapes: big heart, simple star, basic cross, round flower, cloud. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px) for both text and shapes. NO patterns, NO shading, NO colors. Simple bold cartoon shapes. Traditional coloring book page with BIBLE VERSE at top. Ages 3-7.",
       "Templo e Igreja": "BLACK AND WHITE COLORING PAGE ONLY! One simple church: basic rectangle building, triangle roof, one large cross on top, 2-3 big windows (circles or rectangles). CRITICAL: Pure black outlines ONLY (#000000) on white (#FFFFFF). EXTREMELY THICK lines (10px). NO architectural details, NO shading, NO gray tones. Just basic geometric shapes. Like traditional kids coloring books. Ages 3-7.",
       "Valores Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Two simple cartoon children sharing or helping. Big round heads, stick-figure bodies, basic smiling faces with big eyes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO background, NO details, NO shading, NO colors. Just 2 characters with huge empty white spaces. Traditional coloring book style. Ages 3-7."
     };
 
-    // Regular prompts - DESENHOS INFANTIS FÁCEIS DE COLORIR - PRETO E BRANCO
-    const regularPrompts: Record<string, string> = {
+    // HARD MODE - Christian prompts (mais detalhes mas ainda preto e branco)
+    const christianPromptsHard: Record<string, string> = {
+      "Histórias Bíblicas": "BLACK AND WHITE COLORING PAGE ONLY! Create a detailed biblical scene: Noah's Ark with 6-8 animals, David and Goliath confrontation, Moses with detailed staff and flowing robes, or Daniel with multiple lions. CRITICAL: Use ONLY pure black lines (#000000) on pure white background (#FFFFFF). THICK outlines (5-7px). More elements (6-8 objects). Add simple patterns on clothing, facial features, background details. NO GRAY TONES, NO SHADING, NO COLORS - only black lines. Traditional coloring book with moderate detail. Ages 7-12.",
+      "Personagens da Bíblia": "BLACK AND WHITE COLORING PAGE ONLY! One detailed biblical character with full scene: Jesus with disciples, Mary in garden with flowers, Moses parting sea with waves, or David with harp and detailed robes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Include clothing folds, hair details, simple background elements. NO shading, NO gray, NO colors. Traditional detailed coloring book. Ages 7-12.",
+      "Símbolos Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Ornate Christian symbol: decorative cross with patterns, praying hands with rosary beads, dove with olive branch and details, or fish symbol with decorative scales. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). THICK outlines (6-8px). Add decorative patterns and details. NO shading, NO gray tones. Detailed traditional coloring book. Ages 7-12.",
+      "Versículos": "BLACK AND WHITE COLORING PAGE ONLY! At the TOP write in ornate bubble letters: 'João 3:16 - Porque Deus amou o mundo'. Below create a decorative border with: detailed flowers, ornate crosses, doves, hearts with patterns, vines. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add patterns and decorative details. NO shading, NO colors. Detailed coloring book page with BIBLE VERSE at top. Ages 7-12.",
+      "Templo e Igreja": "BLACK AND WHITE COLORING PAGE ONLY! Detailed church: building with brick texture, stained glass window patterns, ornate cross, bell tower, doorway with arch, surrounding trees and path. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Include architectural details and patterns. NO shading, NO gray tones. Detailed traditional coloring book. Ages 7-12.",
+      "Valores Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Scene with 3-4 people showing Christian values: family praying together with details, children helping elderly with background, sharing food with detailed table setting. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Add clothing details, facial expressions, background elements. NO shading, NO colors. Detailed traditional coloring book. Ages 7-12."
+    };
+
+    // EASY MODE - Regular prompts
+    const regularPromptsEasy: Record<string, string> = {
       "Animais Fofos": "BLACK AND WHITE COLORING PAGE ONLY! One super cute animal (puppy, kitten, bunny, or panda). CRITICAL: Pure black outlines (#000000) on white background (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO gray, NO colors. Big round head, simple body, huge cute eyes, tiny nose, happy smile. Like traditional coloring books. NO fur texture, NO patterns. Just bold black contours with huge white spaces inside. Ages 3-7.",
       "Natureza": "BLACK AND WHITE COLORING PAGE ONLY! Simple nature: ONE big happy sun (circle + 8 rays), ONE large flower (circle center + 6 round petals), ONE basic tree (round cloud-shape top + rectangle trunk), 2 big simple butterflies. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO patterns, NO shading, NO colors. Just bold black shapes. Traditional coloring book. Ages 3-7.",
       "Transportes": "BLACK AND WHITE COLORING PAGE ONLY! One cute vehicle (car, train, plane, or boat). CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Simple geometric shapes: circles for wheels, rectangles for body. Friendly face (2 round headlights, smile bumper). NO mechanical details, NO shading. Traditional kids coloring book page. Ages 3-7.",
@@ -39,8 +49,25 @@ serve(async (req) => {
       "Festas": "BLACK AND WHITE COLORING PAGE ONLY! Party items: ONE big cake (2 layers + 3 candles), 4 round balloons with strings, ONE gift box with bow. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO patterns, NO decorations, NO shading, NO colors. Just bold black shapes. Traditional coloring book page. Ages 3-7."
     };
 
-    const prompts = isChristianMode ? christianPrompts : regularPrompts;
-    const prompt = prompts[category] || (isChristianMode ? christianPrompts["Símbolos Cristãos"] : regularPrompts["Animais Fofos"]);
+    // HARD MODE - Regular prompts (mais detalhes)
+    const regularPromptsHard: Record<string, string> = {
+      "Animais Fofos": "BLACK AND WHITE COLORING PAGE ONLY! Detailed cute animal (puppy, kitten, bunny, or panda) with scene. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Add fur patterns, whiskers, detailed eyes, paws with toe beans, simple background (grass, toys). NO shading, NO gray, NO colors. Detailed traditional coloring book. Ages 7-12.",
+      "Natureza": "BLACK AND WHITE COLORING PAGE ONLY! Detailed nature scene: sun with rays and face, 3-4 different flowers with detailed petals and centers, tree with branches and leaf patterns, butterflies with wing patterns, clouds, grass with texture. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). THICK outlines (5-7px). Add patterns and details. NO shading, NO colors. Detailed coloring book. Ages 7-12.",
+      "Transportes": "BLACK AND WHITE COLORING PAGE ONLY! Detailed vehicle with scene: car with hubcaps and details, train with multiple cars and windows, airplane with detailed wings and windows, or boat with sails and waves. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Add mechanical details, patterns, background. NO shading. Detailed coloring book. Ages 7-12.",
+      "Espaço": "BLACK AND WHITE COLORING PAGE ONLY! Detailed space scene: rocket with windows and flames, 3-4 planets with surface patterns and craters, astronaut with detailed suit, stars with various sizes, shooting stars, moon with craters, Earth with continents. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Add patterns and details. NO shading, NO colors. Detailed coloring book. Ages 7-12.",
+      "Profissões": "BLACK AND WHITE COLORING PAGE ONLY! Detailed professional with workplace: doctor with stethoscope and medical tools, firefighter with detailed gear and fire truck, teacher with books and chalkboard, chef with kitchen and food. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Add uniform details, tools, background. NO shading, NO colors. Detailed coloring book. Ages 7-12.",
+      "Festas": "BLACK AND WHITE COLORING PAGE ONLY! Detailed party scene: elaborate birthday cake with decorations and patterns, 6-8 balloons with strings and details, multiple presents with bows and patterns, party hats, confetti, streamers, banners. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (5-7px). Add decorative patterns. NO shading, NO colors. Detailed coloring book. Ages 7-12."
+    };
+
+    // Select the right prompt set based on difficulty and mode
+    let prompts: Record<string, string>;
+    if (isChristianMode) {
+      prompts = difficulty === "hard" ? christianPromptsHard : christianPromptsEasy;
+    } else {
+      prompts = difficulty === "hard" ? regularPromptsHard : regularPromptsEasy;
+    }
+
+    const prompt = prompts[category] || (isChristianMode ? christianPromptsEasy["Símbolos Cristãos"] : regularPromptsEasy["Animais Fofos"]);
 
     console.log('Calling AI gateway with prompt:', prompt);
 

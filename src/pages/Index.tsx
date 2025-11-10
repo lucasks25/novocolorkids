@@ -65,7 +65,7 @@ const Index = () => {
           {/* Badge de Eleito */}
           <div className="inline-block animate-fade-in">
             <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 text-black font-extrabold text-xs md:text-sm px-5 py-2 rounded-full shadow-xl border-2 border-yellow-600">
-              🏆 ELEITO O MELHOR DE 2025
+              🏆 ELEITO A MELHOR PLATAFORMA DE PINTURA DE 2025 🏆
             </div>
           </div>
 

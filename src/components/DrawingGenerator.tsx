@@ -6,7 +6,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import { ColoringCanvas } from "./ColoringCanvas";
-import { BibleVerseCard } from "./BibleVerseCard";
 import { PersistentBanner } from "./PersistentBanner";
 
 interface DrawingGeneratorProps {
@@ -19,8 +18,8 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false }: Drawing
   const [isGenerating, setIsGenerating] = useState(false);
   const [showColoring, setShowColoring] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
-  const [showBibleVerse, setShowBibleVerse] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
 useEffect(() => {
     // Listen for drawing completion to unlock achievement and hide banner
     const handleDrawingComplete = (event: CustomEvent) => {
@@ -58,7 +57,8 @@ useEffect(() => {
       const { data, error } = await supabase.functions.invoke('generate-coloring-image', {
         body: { 
           category: selectedCategory,
-          isChristianMode: isChristianMode 
+          isChristianMode: isChristianMode,
+          difficulty: difficulty
         }
       });
 
@@ -72,12 +72,6 @@ useEffect(() => {
         setCurrentCategory(selectedCategory);
         setShowColoring(false);
         toast.success("Desenho gerado com sucesso!");
-        
-        // Mostrar versículo se estiver em modo cristão
-        if (isChristianMode) {
-          setTimeout(() => setShowBibleVerse(true), 500);
-          setTimeout(() => setShowBibleVerse(false), 8000);
-        }
       } else {
         throw new Error("Nenhuma imagem foi gerada");
       }
@@ -123,8 +117,35 @@ useEffect(() => {
       {/* Banner persistente */}
       {statusMessage && <PersistentBanner message={statusMessage} position="top" />}
       
-      {/* Versículo Bíblico */}
-      {showBibleVerse && <BibleVerseCard onClose={() => setShowBibleVerse(false)} />}
+      {/* Seletor de Nível de Dificuldade */}
+      <Card className="p-4">
+        <div className="flex flex-col gap-3">
+          <h3 className="text-center font-bold text-lg">Nível de Dificuldade</h3>
+          <div className="flex gap-2 justify-center">
+            <Button
+              variant={difficulty === "easy" ? "default" : "outline"}
+              onClick={() => setDifficulty("easy")}
+              className="flex-1 max-w-[200px]"
+            >
+              😊 Fácil
+            </Button>
+            <Button
+              variant={difficulty === "hard" ? "default" : "outline"}
+              onClick={() => setDifficulty("hard")}
+              className="flex-1 max-w-[200px]"
+            >
+              🎨 Difícil
+            </Button>
+          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            {difficulty === "easy" 
+              ? "Desenhos simples com linhas grossas - perfeito para começar!" 
+              : "Desenhos com mais detalhes para desafiar sua criatividade!"
+            }
+          </p>
+        </div>
+      </Card>
+      
       <div className="text-center">
         <Button
           size="lg"
