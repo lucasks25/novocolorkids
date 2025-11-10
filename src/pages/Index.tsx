@@ -60,68 +60,54 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-3 md:px-4 py-6 md:py-12 text-center">
-        <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
+      <section className="container mx-auto px-3 md:px-4 py-8 md:py-16 text-center">
+        <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
           {/* Badge de Eleito */}
-          <div className="inline-block mb-2 md:mb-4">
-            <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 text-black font-black text-xs md:text-sm px-4 md:px-6 py-2 md:py-3 rounded-full shadow-xl animate-pulse border-2 border-yellow-600">
-              ⭐ ELEITO A MELHOR PLATAFORMA DE DESENHOS DE 2025 ⭐
+          <div className="inline-block">
+            <div className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold text-xs md:text-sm px-4 py-1.5 rounded-full shadow-lg">
+              ⭐ #1 em Desenhos Infantis 2025
             </div>
           </div>
 
           {/* Mascot Area */}
-          <div className="flex justify-center mb-4 md:mb-8">
+          <div className="flex justify-center">
             <div className="relative">
               {isChristianMode ? (
                 // Cruz para modo cristão
-                <div className="relative w-24 h-32 md:w-32 md:h-40 lg:w-48 lg:h-56 animate-bounce">
+                <div className="relative w-20 h-28 md:w-28 md:h-36 lg:w-36 lg:h-44">
                   {/* Cruz vertical */}
-                  <div className="absolute left-1/2 top-4 -translate-x-1/2 w-8 md:w-12 lg:w-16 h-24 md:h-32 lg:h-44 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
+                  <div className="absolute left-1/2 top-4 -translate-x-1/2 w-6 md:w-10 lg:w-12 h-20 md:h-28 lg:h-36 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
                   {/* Cruz horizontal */}
-                  <div className="absolute left-1/2 top-10 md:top-12 lg:top-16 -translate-x-1/2 w-20 md:w-28 lg:w-40 h-8 md:h-12 lg:h-16 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
+                  <div className="absolute left-1/2 top-8 md:top-10 lg:top-12 -translate-x-1/2 w-16 md:w-24 lg:w-32 h-6 md:h-10 lg:h-12 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
                   {/* Estrelas estáticas nas diagonais */}
-                  <Sparkles className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 text-yellow-400" />
-                  <Sparkles className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-4 h-4 md:w-6 md:h-6 text-amber-400" />
+                  <Sparkles className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
+                  <Sparkles className="absolute -bottom-1 -left-1 w-4 h-4 md:w-5 md:h-5 text-amber-400" />
                 </div>
               ) : (
                 // Paleta para modo normal
                 <div className="relative">
-                  <div className="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 bg-gradient-to-br from-fun-yellow to-primary rounded-full flex items-center justify-center shadow-2xl animate-bounce">
-                    <Palette className="w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white" strokeWidth={2} />
+                  <div className="w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 bg-gradient-to-br from-fun-yellow to-primary rounded-full flex items-center justify-center shadow-2xl">
+                    <Palette className="w-10 h-10 md:w-14 md:h-14 lg:w-18 lg:h-18 text-white" strokeWidth={2} />
                   </div>
-                  <Sparkles className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 text-fun-yellow animate-pulse" />
-                  <Sparkles className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-4 h-4 md:w-6 md:h-6 text-fun-pink animate-pulse" />
+                  <Sparkles className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 text-fun-yellow animate-pulse" />
+                  <Sparkles className="absolute -bottom-1 -left-1 w-4 h-4 md:w-5 md:h-5 text-fun-pink animate-pulse" />
                 </div>
               )}
             </div>
           </div>
 
-          <h2 className="text-2xl md:text-4xl lg:text-6xl font-black text-foreground leading-tight px-2 uppercase">
-            {isChristianMode 
-              ? "🔥 Transforme a Fé em Arte! 🔥" 
-              : "🎨 SEUS FILHOS VÃO AMAR! 🎨"
-            }
-          </h2>
-          
-          <div className="space-y-3 md:space-y-4">
-            <p className="text-lg md:text-2xl lg:text-3xl font-bold text-primary max-w-2xl mx-auto px-4">
+          <div className="space-y-4 md:space-y-6">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight px-2">
               {isChristianMode 
-                ? "⚡ Desenhos Bíblicos que Ensinam Valores Eternos!" 
-                : "⚡ Desenhos Que Seu Filho VAI Querer Colorir AGORA!"
+                ? "Desenhos Cristãos para Colorir" 
+                : "Desenhos Mágicos para Crianças"
               }
-            </p>
+            </h2>
             
-            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto px-4 font-semibold">
+            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto px-4">
               {isChristianMode 
-                ? "✝️ Ensine a Palavra de Deus de forma criativa e divertida. Cada desenho é uma lição de amor e fé!" 
-                : "🚀 Milhares de pais JÁ estão usando! Seus filhos merecem o MELHOR conteúdo educativo."
-              }
-            </p>
-
-            <p className="text-sm md:text-lg text-foreground/80 max-w-2xl mx-auto px-4">
-              {isChristianMode
-                ? "📖 Mais de 10.000 famílias cristãs já colorindo com a gente!"
-                : "✨ +15.000 desenhos gerados por dia • 98% de satisfação dos pais"
+                ? "Ensine valores eternos através da arte" 
+                : "Crie, imprima e divirta-se colorindo"
               }
             </p>
           </div>
