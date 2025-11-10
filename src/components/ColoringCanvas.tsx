@@ -25,6 +25,7 @@ const COLORS = [
 export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const fullscreenContainerRef = useRef<HTMLDivElement>(null);
   const [fabricCanvas, setFabricCanvas] = useState<FabricCanvas | null>(null);
   const [activeColor, setActiveColor] = useState("#FF0000");
   const [activeTool, setActiveTool] = useState<"draw" | "erase" | "fill">("draw");
@@ -37,11 +38,13 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const [showPalette, setShowPalette] = useState(false);
 
   useEffect(() => {
-    if (!canvasRef.current || !containerRef.current) return;
+    if (!canvasRef.current) return;
+    
+    const container = isFullscreen ? fullscreenContainerRef.current : containerRef.current;
+    if (!container) return;
 
-    const container = containerRef.current;
-    const maxWidth = Math.min(container.clientWidth - 32, 800);
-    const maxHeight = 600;
+    const maxWidth = Math.min(container.clientWidth - 32, isFullscreen ? 1200 : 800);
+    const maxHeight = isFullscreen ? window.innerHeight - 200 : 600;
 
     const canvas = new FabricCanvas(canvasRef.current, {
       width: maxWidth,
@@ -94,7 +97,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
     return () => {
       canvas.dispose();
     };
-  }, [imageUrl]);
+  }, [imageUrl, isFullscreen]);
 
   useEffect(() => {
     if (!fabricCanvas) return;
@@ -406,7 +409,8 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
 
   return (
     <>
-    <Card className="p-4 space-y-4">
+    {!isFullscreen && (
+      <Card className="p-4 space-y-4">
       {/* Tools */}
       <div className="flex flex-wrap gap-2 items-center justify-center">
         <Button
@@ -540,25 +544,28 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
       )}
 
       {/* Canvas */}
-      <div 
-        ref={containerRef}
-        className={`flex justify-center items-center bg-background rounded-lg border-2 border-border overflow-visible touch-manipulation transition-all duration-500 ${
-          isFinished ? "shadow-2xl shadow-primary/50" : ""
-        }`}
-        style={{ touchAction: "none" }}
-      >
-        <canvas 
-          ref={canvasRef}
-        />
-      </div>
+      {!isFullscreen && (
+        <div 
+          ref={containerRef}
+          className={`flex justify-center items-center bg-background rounded-lg border-2 border-border overflow-visible touch-manipulation transition-all duration-500 ${
+            isFinished ? "shadow-2xl shadow-primary/50" : ""
+          }`}
+          style={{ touchAction: "none" }}
+        >
+          <canvas 
+            ref={canvasRef}
+          />
+        </div>
+      )}
       
-      {isFinished && (
+      {isFinished && !isFullscreen && (
         <div className="text-center animate-fade-in">
           <h2 className="text-3xl font-bold text-primary mb-2">🎨 Obra-prima finalizada! 🎉</h2>
           <p className="text-muted-foreground text-lg">Você é um artista incrível!</p>
         </div>
       )}
     </Card>
+    )}
     
     {/* Fullscreen Mode */}
     {isFullscreen && (
@@ -658,14 +665,20 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
         )}
         
         {/* Canvas Area - Full Screen */}
-        <div className="flex-1 flex items-center justify-center bg-muted/30 p-4 overflow-auto relative">
+        <div 
+          ref={fullscreenContainerRef}
+          className="flex-1 flex items-center justify-center bg-muted/30 p-4 overflow-auto relative"
+        >
           <div 
-            className="flex justify-center items-center touch-manipulation"
+            className="flex justify-center items-center"
             style={{ touchAction: "none" }}
           >
-            <canvas ref={canvasRef} className="max-w-full max-h-full" />
+            <canvas 
+              ref={canvasRef}
+              className="max-w-full max-h-full shadow-2xl"
+            />
           </div>
-          
+        
           {/* Floating Color Palette Popup */}
           {showPalette && (activeTool === "draw" || activeTool === "fill") && (
             <div className="absolute top-4 right-4 bg-card border-2 border-border rounded-xl p-4 shadow-2xl max-w-sm animate-fade-in">
