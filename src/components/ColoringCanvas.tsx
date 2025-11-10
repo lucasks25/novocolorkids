@@ -183,20 +183,21 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
       floodFill(pixels, x, y, canvas.width, canvas.height, targetColor, fillColor);
       ctx.putImageData(imageData, 0, 0);
       
-      // Update fabric canvas with filled image
+      // Update fabric canvas with filled image - mantém a backgroundImage
       const newDataUrl = canvas.toDataURL();
       FabricImage.fromURL(newDataUrl).then((newImg) => {
-        fabricCanvas.clear();
-        fabricCanvas.backgroundImage = fabricCanvas.backgroundImage;
+        // Remove apenas objetos adicionados, não a backgroundImage
+        const objects = fabricCanvas.getObjects();
+        objects.forEach(obj => fabricCanvas.remove(obj));
+        
+        // Adiciona a nova imagem com o preenchimento
         newImg.selectable = false;
         newImg.evented = false;
         fabricCanvas.add(newImg);
         fabricCanvas.renderAll();
-      });
-      
-      if (fabricCanvas) {
+        
         saveCanvasState(fabricCanvas);
-      }
+      });
       
       toast.success("Área preenchida!");
     };
@@ -298,12 +299,19 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
 
   const handleClear = () => {
     if (!fabricCanvas) return;
-    fabricCanvas.getObjects().forEach((obj) => {
-      fabricCanvas.remove(obj);
+    
+    // Remove apenas os objetos desenhados (paths), mantendo a imagem de fundo
+    const objects = fabricCanvas.getObjects();
+    objects.forEach((obj) => {
+      // Remove apenas se não for a imagem de fundo
+      if (obj !== fabricCanvas.backgroundImage) {
+        fabricCanvas.remove(obj);
+      }
     });
+    
     fabricCanvas.renderAll();
     saveCanvasState(fabricCanvas);
-    toast.success("Desenho limpo!");
+    toast.success("Cores removidas! Imagem pronta para colorir novamente!");
   };
 
   const handleDownload = () => {
