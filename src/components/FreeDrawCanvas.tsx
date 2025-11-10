@@ -39,16 +39,21 @@ export const FreeDrawCanvas = () => {
       width: maxWidth,
       height: maxHeight,
       isDrawingMode: true,
-      backgroundColor: '#FFFFFF'
+      backgroundColor: '#FFFFFF',
+      renderOnAddRemove: true,
+      preserveObjectStacking: true
     });
 
     const pencilBrush = new PencilBrush(canvas);
     pencilBrush.color = activeColor;
     pencilBrush.width = brushSize;
+    pencilBrush.strokeLineCap = 'round';
+    pencilBrush.strokeLineJoin = 'round';
     canvas.freeDrawingBrush = pencilBrush;
 
     setFabricCanvas(canvas);
 
+    // Salvar estado inicial depois do canvas estar pronto
     setTimeout(() => {
       if (canvas) {
         const initialState = canvas.toJSON();
@@ -57,18 +62,23 @@ export const FreeDrawCanvas = () => {
       }
     }, 100);
 
-    canvas.on('path:created', () => {
+    // Salvar estado quando path é criado
+    canvas.on('path:created', (e) => {
+      console.log('Path created, saving state');
       saveCanvasState(canvas);
     });
 
     return () => {
+      canvas.off('path:created');
       canvas.dispose();
     };
-  }, []);
+  }, []); // Mantém vazio para executar apenas uma vez
 
   useEffect(() => {
     if (!fabricCanvas) return;
 
+    console.log('FreeDrawCanvas: Updating brush settings', { activeTool, activeColor, brushSize });
+    
     // Sempre manter o modo de desenho ativado
     fabricCanvas.isDrawingMode = true;
     fabricCanvas.selection = false; // Desabilita seleção de objetos
@@ -81,6 +91,7 @@ export const FreeDrawCanvas = () => {
       pencilBrush.strokeLineCap = 'round';
       pencilBrush.strokeLineJoin = 'round';
       fabricCanvas.freeDrawingBrush = pencilBrush;
+      console.log('FreeDrawCanvas: Set pencil brush', { color: activeColor, width: brushSize });
     } else {
       const eraserBrush = new PencilBrush(fabricCanvas);
       eraserBrush.color = "#FFFFFF";
@@ -88,6 +99,7 @@ export const FreeDrawCanvas = () => {
       eraserBrush.strokeLineCap = 'round';
       eraserBrush.strokeLineJoin = 'round';
       fabricCanvas.freeDrawingBrush = eraserBrush;
+      console.log('FreeDrawCanvas: Set eraser brush', { width: brushSize * 2 });
     }
     
     // Força o render para aplicar as mudanças
@@ -153,6 +165,10 @@ export const FreeDrawCanvas = () => {
   };
 
   const handleFinish = () => {
+    // Tocar som de aplausos
+    const applauseSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3');
+    applauseSound.play().catch(err => console.log('Audio play failed:', err));
+    
     const duration = 3000;
     const end = Date.now() + duration;
     const colors = ['#FF0000', '#FFD700', '#00FF00', '#0000FF', '#FF1493'];

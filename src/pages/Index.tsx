@@ -60,7 +60,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-3 md:px-4 py-8 md:py-16 text-center">
+      <section className="container mx-auto px-3 md:px-4 py-4 md:py-8 text-center">
         <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
           {/* Badge de Eleito */}
           <div className="inline-block animate-fade-in">
@@ -74,7 +74,7 @@ const Index = () => {
             <div className="relative">
               {isChristianMode ? (
                 // Cruz para modo cristão
-                <div className="relative w-20 h-28 md:w-28 md:h-36 lg:w-36 lg:h-44">
+                <div className="relative w-20 h-28 md:w-28 md:h-36 lg:w-36 lg:h-44 animate-bounce">
                   {/* Cruz vertical */}
                   <div className="absolute left-1/2 top-4 -translate-x-1/2 w-6 md:w-10 lg:w-12 h-20 md:h-28 lg:h-36 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
                   {/* Cruz horizontal */}
@@ -86,7 +86,7 @@ const Index = () => {
               ) : (
                 // Paleta para modo normal
                 <div className="relative">
-                  <div className="w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 bg-gradient-to-br from-fun-yellow to-primary rounded-full flex items-center justify-center shadow-2xl">
+                  <div className="w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 bg-gradient-to-br from-fun-yellow to-primary rounded-full flex items-center justify-center shadow-2xl animate-bounce">
                     <Palette className="w-10 h-10 md:w-14 md:h-14 lg:w-18 lg:h-18 text-white" strokeWidth={2} />
                   </div>
                   <Sparkles className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 text-fun-yellow animate-pulse" />

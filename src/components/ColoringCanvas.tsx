@@ -326,6 +326,10 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const handleFinish = () => {
     setIsFinished(true);
     
+    // Tocar som de aplausos
+    const applauseSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3');
+    applauseSound.play().catch(err => console.log('Audio play failed:', err));
+    
     // Trigger confetti animation
     const duration = 3000;
     const end = Date.now() + duration;

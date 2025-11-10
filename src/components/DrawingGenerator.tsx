@@ -112,6 +112,21 @@ useEffect(() => {
     }
   };
 
+  const downloadAsPNG = () => {
+    if (!generatedImage) return;
+
+    try {
+      const link = document.createElement("a");
+      link.download = `desenho-colorindo-alegria-${Date.now()}.png`;
+      link.href = generatedImage;
+      link.click();
+      toast.success("PNG baixado com sucesso!");
+    } catch (error) {
+      console.error('Error downloading PNG:', error);
+      toast.error("Erro ao baixar PNG. Tente novamente!");
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Banner persistente */}
@@ -187,6 +202,15 @@ useEffect(() => {
             >
               <Palette className="mr-2 w-5 h-5" />
               Colorir Agora
+            </Button>
+            <Button
+              size="lg"
+              variant="secondary"
+              onClick={downloadAsPNG}
+              className="text-lg py-5 px-6 rounded-full"
+            >
+              <Download className="mr-2 w-5 h-5" />
+              Baixar PNG
             </Button>
             <Button
               size="lg"
