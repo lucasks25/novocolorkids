@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import jsPDF from "jspdf";
 import { ColoringCanvas } from "./ColoringCanvas";
 import { BibleVerseCard } from "./BibleVerseCard";
+import { PersistentBanner } from "./PersistentBanner";
 
 interface DrawingGeneratorProps {
   selectedCategory?: string;
@@ -19,13 +20,14 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false }: Drawing
   const [showColoring, setShowColoring] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [showBibleVerse, setShowBibleVerse] = useState(false);
-
-  useEffect(() => {
-    // Listen for drawing completion to unlock achievement
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+useEffect(() => {
+    // Listen for drawing completion to unlock achievement and hide banner
     const handleDrawingComplete = (event: CustomEvent) => {
       if (currentCategory && (window as any).unlockAchievement) {
         (window as any).unlockAchievement(currentCategory);
       }
+      setStatusMessage(null);
     };
 
     window.addEventListener('drawingCompleted', handleDrawingComplete as EventListener);
@@ -34,12 +36,23 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false }: Drawing
     };
   }, [currentCategory]);
 
+  useEffect(() => {
+    if (showColoring) {
+      setStatusMessage('Colorindo... finalize quando terminar!');
+    } else if (generatedImage) {
+      setStatusMessage('Desenho pronto! Toque em Colorir ou Baixar.');
+    } else {
+      setStatusMessage(null);
+    }
+  }, [showColoring, generatedImage]);
+
   const generateDrawing = async () => {
     if (!selectedCategory) {
       toast.error("Por favor, selecione uma categoria primeiro!");
       return;
     }
 
+    setStatusMessage("Gerando desenho...");
     setIsGenerating(true);
     try {
       const { data, error } = await supabase.functions.invoke('generate-coloring-image', {
@@ -107,6 +120,9 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false }: Drawing
 
   return (
     <div className="space-y-6">
+      {/* Banner persistente */}
+      {statusMessage && <PersistentBanner message={statusMessage} position="top" />}
+      
       {/* Versículo Bíblico */}
       {showBibleVerse && <BibleVerseCard onClose={() => setShowBibleVerse(false)} />}
       <div className="text-center">
