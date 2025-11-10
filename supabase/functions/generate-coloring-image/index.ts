@@ -13,6 +13,9 @@ serve(async (req) => {
   try {
     const { category, isChristianMode, isChristmasMode, difficulty = "easy" } = await req.json();
     console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode, 'Christmas mode:', isChristmasMode, 'Difficulty:', difficulty);
+    
+    // Normalize difficulty to easy or medium only
+    const normalizedDifficulty = difficulty === "hard" ? "medium" : difficulty;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
@@ -29,14 +32,14 @@ serve(async (req) => {
       "Valores Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Two simple cartoon children sharing or helping. Big round heads, stick-figure bodies, basic smiling faces with big eyes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO background, NO details, NO shading, NO colors. Just 2 characters with huge empty white spaces. Traditional coloring book style. Ages 3-7."
     };
 
-    // HARD MODE - Christian prompts (moderadamente detalhado, ainda adequado para crianças)
-    const christianPromptsHard: Record<string, string> = {
-      "Histórias Bíblicas": "BLACK AND WHITE COLORING PAGE ONLY! Biblical scene with moderate detail: Noah's Ark with 5-6 cute animals, David with slingshot and simple Goliath, Moses with staff and simple waves, or Daniel with 3-4 friendly lions. CRITICAL: Use ONLY pure black lines (#000000) on pure white background (#FFFFFF). THICK outlines (6-8px). Add simple facial expressions and basic clothing patterns. NO GRAY TONES, NO SHADING, NO COLORS - only black lines. Traditional coloring book with moderate detail. Ages 6-10.",
-      "Personagens da Bíblia": "BLACK AND WHITE COLORING PAGE ONLY! Biblical character with simple scene: Jesus with kind expression and simple robes, Mary with flowing dress and flowers, Moses with detailed beard and robe folds, or David with harp and simple patterns. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic clothing details and simple background. NO shading, NO gray, NO colors. Traditional moderate coloring book. Ages 6-10.",
-      "Símbolos Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Christian symbol with moderate decoration: cross with simple patterns, praying hands with basic folds, dove with simple feathers, or fish with basic scales pattern. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). THICK outlines (7-9px). Add simple decorative elements. NO shading, NO gray tones. Moderate traditional coloring book. Ages 6-10.",
-      "Versículos": "BLACK AND WHITE COLORING PAGE ONLY! At the TOP write in decorative bubble letters: 'João 3:16 - Porque Deus amou o mundo'. Below add simple decorative border with: basic flowers (5-6 petals), simple crosses, hearts, basic doves. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Add basic patterns. NO shading, NO colors. Moderate coloring book page with BIBLE VERSE at top. Ages 6-10.",
-      "Templo e Igreja": "BLACK AND WHITE COLORING PAGE ONLY! Church with moderate detail: building with simple windows, basic roof tiles pattern, decorative cross, simple door, 2-3 basic trees. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic architectural elements. NO shading, NO gray tones. Moderate traditional coloring book. Ages 6-10.",
-      "Valores Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Scene with 2-3 people: children sharing with basic expressions, helping with simple details, or praying together with basic clothing. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic facial features and simple background. NO shading, NO colors. Moderate traditional coloring book. Ages 6-10."
+    // MEDIUM MODE - Christian prompts (poucos detalhes a mais, ainda muito apropriado para crianças)
+    const christianPromptsMedium: Record<string, string> = {
+      "Histórias Bíblicas": "BLACK AND WHITE COLORING PAGE ONLY! Biblical scene with few extra details: Noah's Ark with 4-5 cute animals, young David with slingshot, Moses with staff, or Daniel with 2-3 friendly lions. CRITICAL: Use ONLY pure black lines (#000000) on pure white background (#FFFFFF). THICK outlines (7-9px). Simple facial expressions, minimal details. NO GRAY TONES, NO SHADING, NO COLORS - only black lines. Traditional coloring book. Ages 4-8.",
+      "Personagens da Bíblia": "BLACK AND WHITE COLORING PAGE ONLY! Biblical character with minimal scene: Jesus with kind smile, Mary with simple dress, Moses with basic beard, or David with one simple object. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few basic details. NO shading, NO gray, NO colors. Traditional simple coloring book. Ages 4-8.",
+      "Símbolos Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Christian symbol with minimal decoration: cross with one simple pattern, praying hands with few lines, dove with basic wings, or fish with simple design. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). THICK outlines (7-9px). Minimal decorative elements. NO shading, NO gray tones. Simple coloring book. Ages 4-8.",
+      "Versículos": "BLACK AND WHITE COLORING PAGE ONLY! At the TOP write in simple bubble letters: 'João 3:16 - Porque Deus amou o mundo'. Below add few simple shapes: basic flowers, hearts, simple crosses. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Minimal patterns. NO shading, NO colors. Simple coloring book page with BIBLE VERSE at top. Ages 4-8.",
+      "Templo e Igreja": "BLACK AND WHITE COLORING PAGE ONLY! Simple church: building with few windows, basic roof, cross on top, simple door, 1-2 basic trees. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few basic elements. NO shading, NO gray tones. Simple coloring book. Ages 4-8.",
+      "Valores Cristãos": "BLACK AND WHITE COLORING PAGE ONLY! Scene with 2 people: children sharing or helping with simple expressions and minimal details. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Basic facial features. NO shading, NO colors. Simple coloring book. Ages 4-8."
     };
 
     // EASY MODE - Regular prompts
@@ -49,14 +52,14 @@ serve(async (req) => {
       "Festas": "BLACK AND WHITE COLORING PAGE ONLY! Party items: ONE big cake (2 layers + 3 candles), 4 round balloons with strings, ONE gift box with bow. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO patterns, NO decorations, NO shading, NO colors. Just bold black shapes. Traditional coloring book page. Ages 3-7."
     };
 
-    // HARD MODE - Regular prompts (moderadamente detalhado)
-    const regularPromptsHard: Record<string, string> = {
-      "Animais Fofos": "BLACK AND WHITE COLORING PAGE ONLY! Cute animal with moderate detail (puppy, kitten, bunny, or panda). CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add simple fur texture lines, whiskers, detailed eyes with pupils, basic paws, small background element (ball or flower). NO shading, NO gray, NO colors. Moderate traditional coloring book. Ages 6-10.",
-      "Natureza": "BLACK AND WHITE COLORING PAGE ONLY! Nature scene with moderate detail: sun with rays and simple face, 2-3 flowers with detailed petals, tree with basic branches and leaves, 2-3 butterflies with wing patterns, simple clouds. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). THICK outlines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Transportes": "BLACK AND WHITE COLORING PAGE ONLY! Vehicle with moderate detail: car with simple hubcaps and windows, train with 2 cars and details, airplane with wings and windows, or boat with sails and simple waves. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic details and simple background. NO shading. Moderate coloring book. Ages 6-10.",
-      "Espaço": "BLACK AND WHITE COLORING PAGE ONLY! Space scene with moderate detail: rocket with 2-3 windows and simple flames, 2-3 planets with basic patterns, astronaut with simple suit details, various sized stars, moon with simple craters. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Profissões": "BLACK AND WHITE COLORING PAGE ONLY! Professional with moderate detail: doctor with stethoscope and basic tools, firefighter with gear details and simple truck, teacher with books and basic board, chef with simple kitchen items. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add uniform details and basic tools. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Festas": "BLACK AND WHITE COLORING PAGE ONLY! Party scene with moderate detail: birthday cake with 3 layers and simple decorations, 5-6 balloons with strings, 2-3 presents with basic patterns and bows, simple confetti. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic decorative elements. NO shading, NO colors. Moderate coloring book. Ages 6-10."
+    // MEDIUM MODE - Regular prompts (poucos detalhes a mais, apropriado para crianças)
+    const regularPromptsMedium: Record<string, string> = {
+      "Animais Fofos": "BLACK AND WHITE COLORING PAGE ONLY! Cute animal with few extra details (puppy, kitten, bunny, or panda). CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Add simple whiskers, basic eyes, minimal details. NO shading, NO gray, NO colors. Simple traditional coloring book. Ages 4-8.",
+      "Natureza": "BLACK AND WHITE COLORING PAGE ONLY! Nature scene with few details: sun with simple rays, 2 flowers with basic petals, simple tree, 2 butterflies. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). THICK outlines (7-9px). Minimal patterns. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Transportes": "BLACK AND WHITE COLORING PAGE ONLY! Vehicle with few details: car with simple windows, train with basic details, airplane with wings, or boat with simple sail. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few basic details. NO shading. Simple coloring book. Ages 4-8.",
+      "Espaço": "BLACK AND WHITE COLORING PAGE ONLY! Space scene with few details: rocket with 1-2 windows, 2 planets, few stars, simple moon. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Minimal patterns. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Profissões": "BLACK AND WHITE COLORING PAGE ONLY! Professional with few details: doctor with simple stethoscope, firefighter with basic gear, teacher with one book, chef with simple hat. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few uniform details. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Festas": "BLACK AND WHITE COLORING PAGE ONLY! Party scene with few details: birthday cake with 2 layers, 4-5 balloons, 2 simple presents. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few decorative elements. NO shading, NO colors. Simple coloring book. Ages 4-8."
     };
 
     // EASY MODE - Christmas prompts
@@ -69,24 +72,24 @@ serve(async (req) => {
       "Enfeites Natalinos": "BLACK AND WHITE COLORING PAGE ONLY! Simple Christmas decorations: 3-4 basic ornament balls (circles), candy cane (simple curved stick with stripes), simple bell, basic star. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO details, NO shading. Traditional coloring book. Ages 3-7."
     };
 
-    // HARD MODE - Christmas prompts
-    const christmasPromptsHard: Record<string, string> = {
-      "Papai Noel": "BLACK AND WHITE COLORING PAGE ONLY! Santa with moderate detail: detailed beard with curls, expressive eyes, detailed hat with fur trim, belt with buckle, simple bag. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Árvore de Natal": "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with moderate detail: layered branches, 8-10 ornaments (various shapes), detailed star, garland, simple presents underneath. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic decorations. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Presentes": "BLACK AND WHITE COLORING PAGE ONLY! 4-5 gift boxes with moderate detail: various sizes, detailed bows, ribbon patterns, basic decorative wrapping designs. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Renas": "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with moderate detail: detailed antlers, expressive face, simple harness with bells, basic body details, simple sleigh element. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic details. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Bonecos de Neve": "BLACK AND WHITE COLORING PAGE ONLY! Snowman with moderate detail: 3 snowballs, detailed scarf with pattern, top hat with band, stick arms with mittens, detailed face with carrot nose, button details. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
-      "Enfeites Natalinos": "BLACK AND WHITE COLORING PAGE ONLY! Christmas decorations with moderate detail: detailed ornament balls with patterns, candy canes with stripes, bells with bows, stars with details, holly leaves with berries. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add decorative patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10."
+    // MEDIUM MODE - Christmas prompts (poucos detalhes a mais, apropriado para crianças)
+    const christmasPromptsMedium: Record<string, string> = {
+      "Papai Noel": "BLACK AND WHITE COLORING PAGE ONLY! Santa with few extra details: simple beard, happy face, basic hat with pom-pom, simple belt, small bag. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few basic patterns. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Árvore de Natal": "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with few details: simple branches, 5-6 basic ornaments, star on top, simple trunk, 1-2 presents. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few decorations. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Presentes": "BLACK AND WHITE COLORING PAGE ONLY! 3-4 gift boxes with few details: simple boxes, basic bows, simple ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Minimal patterns. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Renas": "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with few details: simple antlers, basic face, round nose, simple body. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few basic details. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Bonecos de Neve": "BLACK AND WHITE COLORING PAGE ONLY! Snowman with few details: 3 circles, simple hat, basic scarf, stick arms, simple face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Minimal patterns. NO shading, NO colors. Simple coloring book. Ages 4-8.",
+      "Enfeites Natalinos": "BLACK AND WHITE COLORING PAGE ONLY! Christmas decorations with few details: 3-4 simple ornament balls, basic candy cane, simple bell, basic star. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (7-9px). Few decorative elements. NO shading, NO colors. Simple coloring book. Ages 4-8."
     };
 
     // Select the right prompt set based on difficulty and mode
     let prompts: Record<string, string>;
     if (isChristmasMode) {
-      prompts = difficulty === "hard" ? christmasPromptsHard : christmasPromptsEasy;
+      prompts = normalizedDifficulty === "medium" ? christmasPromptsMedium : christmasPromptsEasy;
     } else if (isChristianMode) {
-      prompts = difficulty === "hard" ? christianPromptsHard : christianPromptsEasy;
+      prompts = normalizedDifficulty === "medium" ? christianPromptsMedium : christianPromptsEasy;
     } else {
-      prompts = difficulty === "hard" ? regularPromptsHard : regularPromptsEasy;
+      prompts = normalizedDifficulty === "medium" ? regularPromptsMedium : regularPromptsEasy;
     }
 
     const defaultPrompt = isChristmasMode 

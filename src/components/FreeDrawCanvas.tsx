@@ -41,8 +41,8 @@ export const FreeDrawCanvas = () => {
       height: maxHeight,
       isDrawingMode: true,
       backgroundColor: '#FFFFFF',
-      renderOnAddRemove: true,
-      preserveObjectStacking: true
+      selection: false,
+      renderOnAddRemove: false
     });
 
     const pencilBrush = new PencilBrush(canvas);
@@ -54,68 +54,56 @@ export const FreeDrawCanvas = () => {
 
     setFabricCanvas(canvas);
 
-    // Salvar estado inicial depois do canvas estar pronto
-    setTimeout(() => {
-      if (canvas) {
-        const initialState = canvas.toJSON();
-        setCanvasHistory([JSON.stringify(initialState)]);
-        setHistoryStep(0);
-      }
-    }, 100);
+    // Salvar estado inicial
+    const initialState = JSON.stringify(canvas.toJSON());
+    setCanvasHistory([initialState]);
+    setHistoryStep(0);
 
     // Salvar estado quando path é criado
-    canvas.on('path:created', (e) => {
+    const handlePathCreated = () => {
       console.log('Path created, saving state');
-      saveCanvasState(canvas);
-    });
+      const json = JSON.stringify(canvas.toJSON());
+      setCanvasHistory((prev) => {
+        const newHistory = prev.slice(0, historyStep + 1);
+        newHistory.push(json);
+        return newHistory;
+      });
+      setHistoryStep((prev) => prev + 1);
+    };
+
+    canvas.on('path:created', handlePathCreated);
 
     return () => {
-      canvas.off('path:created');
+      canvas.off('path:created', handlePathCreated);
       canvas.dispose();
     };
-  }, []); // Mantém vazio para executar apenas uma vez
+  }, []);
 
   useEffect(() => {
     if (!fabricCanvas) return;
 
     console.log('FreeDrawCanvas: Updating brush settings', { activeTool, activeColor, brushSize });
     
-    // Sempre manter o modo de desenho ativado
     fabricCanvas.isDrawingMode = true;
-    fabricCanvas.selection = false; // Desabilita seleção de objetos
+    fabricCanvas.selection = false;
     
     if (activeTool === "draw") {
-      const pencilBrush = new PencilBrush(fabricCanvas);
-      pencilBrush.color = activeColor;
-      pencilBrush.width = brushSize;
-      // Configurações importantes para evitar que o desenho desapareça
-      pencilBrush.strokeLineCap = 'round';
-      pencilBrush.strokeLineJoin = 'round';
-      fabricCanvas.freeDrawingBrush = pencilBrush;
-      console.log('FreeDrawCanvas: Set pencil brush', { color: activeColor, width: brushSize });
+      if (fabricCanvas.freeDrawingBrush) {
+        fabricCanvas.freeDrawingBrush.color = activeColor;
+        fabricCanvas.freeDrawingBrush.width = brushSize;
+      }
+      console.log('FreeDrawCanvas: Updated pencil brush', { color: activeColor, width: brushSize });
     } else {
-      const eraserBrush = new PencilBrush(fabricCanvas);
-      eraserBrush.color = "#FFFFFF";
-      eraserBrush.width = brushSize * 2;
-      eraserBrush.strokeLineCap = 'round';
-      eraserBrush.strokeLineJoin = 'round';
-      fabricCanvas.freeDrawingBrush = eraserBrush;
-      console.log('FreeDrawCanvas: Set eraser brush', { width: brushSize * 2 });
+      if (fabricCanvas.freeDrawingBrush) {
+        fabricCanvas.freeDrawingBrush.color = "#FFFFFF";
+        fabricCanvas.freeDrawingBrush.width = brushSize * 2;
+      }
+      console.log('FreeDrawCanvas: Updated eraser brush', { width: brushSize * 2 });
     }
     
-    // Força o render para aplicar as mudanças
     fabricCanvas.renderAll();
   }, [activeTool, activeColor, brushSize, fabricCanvas]);
 
-  const saveCanvasState = (canvas: FabricCanvas) => {
-    const json = JSON.stringify(canvas.toJSON());
-    setCanvasHistory((prev) => {
-      const newHistory = prev.slice(0, historyStep + 1);
-      newHistory.push(json);
-      return newHistory;
-    });
-    setHistoryStep((prev) => prev + 1);
-  };
 
   const handleUndo = () => {
     if (historyStep > 0 && fabricCanvas) {
@@ -144,7 +132,15 @@ export const FreeDrawCanvas = () => {
     fabricCanvas.clear();
     fabricCanvas.backgroundColor = '#FFFFFF';
     fabricCanvas.renderAll();
-    saveCanvasState(fabricCanvas);
+    
+    const json = JSON.stringify(fabricCanvas.toJSON());
+    setCanvasHistory((prev) => {
+      const newHistory = prev.slice(0, historyStep + 1);
+      newHistory.push(json);
+      return newHistory;
+    });
+    setHistoryStep((prev) => prev + 1);
+    
     toast.success("Tela limpa!");
   };
 

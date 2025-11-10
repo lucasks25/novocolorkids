@@ -13,11 +13,35 @@ const Index = () => {
   const [isChristianMode, setIsChristianMode] = useState(false);
   const [isChristmasMode, setIsChristmasMode] = useState(false);
   const generatorRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-christian-mode', String(isChristianMode));
     document.documentElement.setAttribute('data-christmas-mode', String(isChristmasMode));
   }, [isChristianMode, isChristmasMode]);
+
+  useEffect(() => {
+    // Play Christmas music when Christmas mode is active
+    if (isChristmasMode) {
+      if (!audioRef.current) {
+        audioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2993/2993-preview.mp3');
+        audioRef.current.loop = true;
+        audioRef.current.volume = 0.3;
+      }
+      audioRef.current.play().catch(err => console.log('Audio play failed:', err));
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, [isChristmasMode]);
   
   const scrollToGenerator = () => {
     generatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -92,10 +116,10 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-3 md:px-4 py-4 md:py-8 text-center">
-        <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
-          {/* Badge de Eleito */}
-          <div className="inline-block animate-fade-in">
+      <section className="container mx-auto px-3 md:px-4 py-2 md:py-4 text-center">
+        <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
+          {/* Badge de Eleito - Mais alto */}
+          <div className="inline-block animate-fade-in pt-2 md:pt-4">
             <div className="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 text-black font-extrabold text-xs md:text-sm px-5 py-2 rounded-full shadow-xl border-2 border-yellow-600">
               🏆 ELEITO A MELHOR PLATAFORMA DE PINTURA DE 2025 🏆
             </div>
@@ -104,7 +128,21 @@ const Index = () => {
           {/* Mascot Area */}
           <div className="flex justify-center animate-scale-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
             <div className="relative">
-              {isChristianMode ? (
+              {isChristmasMode ? (
+                // Árvore de Natal para modo natalino
+                <div className="relative w-32 h-40 md:w-40 md:h-48 lg:w-48 lg:h-56 animate-bounce">
+                  {/* Árvore - Triângulo */}
+                  <div className="absolute left-1/2 top-4 -translate-x-1/2 w-0 h-0 border-l-[50px] md:border-l-[70px] border-r-[50px] md:border-r-[70px] border-b-[80px] md:border-b-[100px] border-l-transparent border-r-transparent border-b-green-600 drop-shadow-2xl" />
+                  {/* Tronco */}
+                  <div className="absolute left-1/2 bottom-8 -translate-x-1/2 w-6 md:w-8 h-12 md:h-16 bg-amber-800 rounded" />
+                  {/* Estrela no topo */}
+                  <Sparkles className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 md:w-8 md:h-8 text-yellow-400 animate-pulse" />
+                  {/* Enfeites coloridos */}
+                  <div className="absolute left-1/2 top-12 -translate-x-1/2 -translate-x-4 w-4 h-4 md:w-5 md:h-5 bg-red-500 rounded-full animate-pulse" />
+                  <div className="absolute left-1/2 top-12 translate-x-4 -translate-x-1/2 w-4 h-4 md:w-5 md:h-5 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
+                  <div className="absolute left-1/2 top-20 -translate-x-1/2 w-4 h-4 md:w-5 md:h-5 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
+                </div>
+              ) : isChristianMode ? (
                 // Cruz para modo cristão
                 <div className="relative w-20 h-28 md:w-28 md:h-36 lg:w-36 lg:h-44 animate-bounce">
                   {/* Cruz vertical */}

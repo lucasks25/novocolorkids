@@ -20,7 +20,7 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false, isChristm
   const [showColoring, setShowColoring] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
+  const [difficulty, setDifficulty] = useState<"easy" | "medium">("easy");
 useEffect(() => {
     // Listen for drawing completion to unlock achievement and hide banner
     const handleDrawingComplete = (event: CustomEvent) => {
@@ -147,17 +147,17 @@ useEffect(() => {
               😊 Fácil
             </Button>
             <Button
-              variant={difficulty === "hard" ? "default" : "outline"}
-              onClick={() => setDifficulty("hard")}
+              variant={difficulty === "medium" ? "default" : "outline"}
+              onClick={() => setDifficulty("medium")}
               className="flex-1 max-w-[200px]"
             >
-              🎨 Difícil
+              🎨 Médio
             </Button>
           </div>
           <p className="text-center text-sm text-muted-foreground">
             {difficulty === "easy" 
               ? "Desenhos simples com linhas grossas - perfeito para começar!" 
-              : "Desenhos com mais detalhes para desafiar sua criatividade!"
+              : "Desenhos com um pouquinho mais de detalhes, mas ainda fáceis!"
             }
           </p>
         </div>
