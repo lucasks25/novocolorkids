@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, Download, Palette, Heart, Rocket, Trees, Car, Briefcase, Cake, PenTool, Gift, Candy, TreePine } from "lucide-react";
 import DrawingGenerator from "@/components/DrawingGenerator";
-import { FreeDrawCanvas } from "@/components/FreeDrawCanvas";
+import { SimpleDrawCanvas } from "@/components/SimpleDrawCanvas";
 import { FloatingChristianButton } from "@/components/FloatingChristianButton";
 import { SnowEffect } from "@/components/SnowEffect";
 
@@ -276,7 +276,7 @@ const Index = () => {
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-12 text-foreground px-2">
               Desenhe Livremente
             </h3>
-            <FreeDrawCanvas />
+            <SimpleDrawCanvas />
           </TabsContent>
         </Tabs>
       </section>

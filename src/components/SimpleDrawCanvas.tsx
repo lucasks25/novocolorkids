@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Canvas as FabricCanvas, PencilBrush } from "fabric";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
@@ -19,10 +18,10 @@ const COLORS = [
   "#C0C0C0", "#D3D3D3", "#DCDCDC", "#F5F5F5", "#FFFFFF"
 ];
 
-export const FreeDrawCanvas = () => {
+export const SimpleDrawCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [fabricCanvas, setFabricCanvas] = useState<FabricCanvas | null>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
   const [activeColor, setActiveColor] = useState("#000000");
   const [activeTool, setActiveTool] = useState<"draw" | "erase">("draw");
   const [brushSize, setBrushSize] = useState(5);
@@ -32,144 +31,169 @@ export const FreeDrawCanvas = () => {
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current) return;
 
+    const canvas = canvasRef.current;
     const container = containerRef.current;
+    
     const maxWidth = Math.min(container.clientWidth - 32, 800);
     const maxHeight = 600;
 
-    const canvas = new FabricCanvas(canvasRef.current, {
-      width: maxWidth,
-      height: maxHeight,
-      isDrawingMode: true,
-      backgroundColor: '#FFFFFF',
-      selection: false,
-      renderOnAddRemove: false
-    });
+    canvas.width = maxWidth;
+    canvas.height = maxHeight;
 
-    const pencilBrush = new PencilBrush(canvas);
-    pencilBrush.color = activeColor;
-    pencilBrush.width = brushSize;
-    pencilBrush.strokeLineCap = 'round';
-    pencilBrush.strokeLineJoin = 'round';
-    canvas.freeDrawingBrush = pencilBrush;
-
-    setFabricCanvas(canvas);
-
-    // Salvar estado inicial
-    const initialState = JSON.stringify(canvas.toJSON());
-    setCanvasHistory([initialState]);
-    setHistoryStep(0);
-
-    // Salvar estado quando path é criado
-    const handlePathCreated = () => {
-      console.log('Path created, saving state');
-      const json = JSON.stringify(canvas.toJSON());
-      setCanvasHistory((prev) => {
-        const newHistory = prev.slice(0, historyStep + 1);
-        newHistory.push(json);
-        return newHistory;
-      });
-      setHistoryStep((prev) => prev + 1);
-    };
-
-    canvas.on('path:created', handlePathCreated);
-
-    return () => {
-      canvas.off('path:created', handlePathCreated);
-      canvas.dispose();
-    };
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Save initial state
+      saveState();
+    }
   }, []);
 
-  useEffect(() => {
-    if (!fabricCanvas) return;
+  const saveState = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    console.log('FreeDrawCanvas: Updating brush settings', { activeTool, activeColor, brushSize });
-    
-    fabricCanvas.isDrawingMode = true;
-    fabricCanvas.selection = false;
-    
-    if (activeTool === "draw") {
-      if (fabricCanvas.freeDrawingBrush) {
-        fabricCanvas.freeDrawingBrush.color = activeColor;
-        fabricCanvas.freeDrawingBrush.width = brushSize;
-      }
-      console.log('FreeDrawCanvas: Updated pencil brush', { color: activeColor, width: brushSize });
+    const dataUrl = canvas.toDataURL();
+    setCanvasHistory((prev) => {
+      const newHistory = prev.slice(0, historyStep + 1);
+      newHistory.push(dataUrl);
+      return newHistory;
+    });
+    setHistoryStep((prev) => prev + 1);
+  };
+
+  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    setIsDrawing(true);
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    let x: number, y: number;
+
+    if ('touches' in e) {
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
     } else {
-      if (fabricCanvas.freeDrawingBrush) {
-        fabricCanvas.freeDrawingBrush.color = "#FFFFFF";
-        fabricCanvas.freeDrawingBrush.width = brushSize * 2;
-      }
-      console.log('FreeDrawCanvas: Updated eraser brush', { width: brushSize * 2 });
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
     }
-    
-    fabricCanvas.renderAll();
-  }, [activeTool, activeColor, brushSize, fabricCanvas]);
 
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  };
+
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isDrawing) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    let x: number, y: number;
+
+    if ('touches' in e) {
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
+    } else {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+    }
+
+    ctx.lineWidth = activeTool === "erase" ? brushSize * 2 : brushSize;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = activeTool === "erase" ? "#FFFFFF" : activeColor;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  };
+
+  const stopDrawing = () => {
+    if (isDrawing) {
+      setIsDrawing(false);
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.closePath();
+          saveState();
+        }
+      }
+    }
+  };
 
   const handleUndo = () => {
-    if (historyStep > 0 && fabricCanvas) {
+    if (historyStep > 0) {
       const newStep = historyStep - 1;
       setHistoryStep(newStep);
-      const state = JSON.parse(canvasHistory[newStep]);
-      fabricCanvas.loadFromJSON(state).then(() => {
-        fabricCanvas.renderAll();
-      });
+      restoreState(canvasHistory[newStep]);
     }
   };
 
   const handleRedo = () => {
-    if (historyStep < canvasHistory.length - 1 && fabricCanvas) {
+    if (historyStep < canvasHistory.length - 1) {
       const newStep = historyStep + 1;
       setHistoryStep(newStep);
-      const state = JSON.parse(canvasHistory[newStep]);
-      fabricCanvas.loadFromJSON(state).then(() => {
-        fabricCanvas.renderAll();
-      });
+      restoreState(canvasHistory[newStep]);
     }
   };
 
+  const restoreState = (dataUrl: string) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const img = new Image();
+    img.src = dataUrl;
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+  };
+
   const handleClear = () => {
-    if (!fabricCanvas) return;
-    fabricCanvas.clear();
-    fabricCanvas.backgroundColor = '#FFFFFF';
-    fabricCanvas.renderAll();
-    
-    const json = JSON.stringify(fabricCanvas.toJSON());
-    setCanvasHistory((prev) => {
-      const newHistory = prev.slice(0, historyStep + 1);
-      newHistory.push(json);
-      return newHistory;
-    });
-    setHistoryStep((prev) => prev + 1);
-    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    saveState();
     toast.success("Tela limpa!");
   };
 
   const handleDownload = () => {
-    if (!fabricCanvas) return;
-    
-    const dataURL = fabricCanvas.toDataURL({
-      format: "png",
-      quality: 1,
-      multiplier: 2
-    });
-    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const link = document.createElement("a");
     link.download = `desenho-livre-${Date.now()}.png`;
-    link.href = dataURL;
+    link.href = canvas.toDataURL();
     link.click();
-    
     toast.success("Desenho baixado!");
   };
 
   const handleFinish = () => {
-    // Tocar som de aplausos
     const applauseSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3');
     applauseSound.play().catch(err => console.log('Audio play failed:', err));
-    
+
     const duration = 3000;
     const end = Date.now() + duration;
     const colors = ['#FF0000', '#FFD700', '#00FF00', '#0000FF', '#FF1493'];
-    
+
     (function frame() {
       confetti({
         particleCount: 3,
@@ -190,19 +214,15 @@ export const FreeDrawCanvas = () => {
         requestAnimationFrame(frame);
       }
     }());
-    
+
     toast.success("🎉 Que obra de arte incrível!");
   };
 
   const handlePrint = () => {
-    if (!fabricCanvas) return;
-    
-    const dataURL = fabricCanvas.toDataURL({
-      format: "png",
-      quality: 1,
-      multiplier: 2
-    });
-    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const dataURL = canvas.toDataURL();
     const printWindow = window.open('', '_blank');
     if (printWindow) {
       printWindow.document.write(`
@@ -225,7 +245,7 @@ export const FreeDrawCanvas = () => {
       `);
       printWindow.document.close();
     }
-    
+
     toast.success("Preparando impressão!");
   };
 
@@ -318,7 +338,17 @@ export const FreeDrawCanvas = () => {
 
       {/* Canvas */}
       <div ref={containerRef} className="flex justify-center bg-muted/30 rounded-lg p-2 md:p-4 overflow-hidden">
-        <canvas ref={canvasRef} className="border-4 border-border rounded-lg shadow-lg bg-white touch-none" />
+        <canvas
+          ref={canvasRef}
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={stopDrawing}
+          onMouseLeave={stopDrawing}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={stopDrawing}
+          className="border-4 border-border rounded-lg shadow-lg bg-white touch-none cursor-crosshair"
+        />
       </div>
 
       {/* Action Buttons */}
