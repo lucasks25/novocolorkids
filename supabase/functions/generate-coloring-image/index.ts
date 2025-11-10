@@ -11,8 +11,8 @@ serve(async (req) => {
   }
 
   try {
-    const { category, isChristianMode, difficulty = "easy" } = await req.json();
-    console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode, 'Difficulty:', difficulty);
+    const { category, isChristianMode, isChristmasMode, difficulty = "easy" } = await req.json();
+    console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode, 'Christmas mode:', isChristmasMode, 'Difficulty:', difficulty);
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
@@ -59,15 +59,41 @@ serve(async (req) => {
       "Festas": "BLACK AND WHITE COLORING PAGE ONLY! Party scene with moderate detail: birthday cake with 3 layers and simple decorations, 5-6 balloons with strings, 2-3 presents with basic patterns and bows, simple confetti. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic decorative elements. NO shading, NO colors. Moderate coloring book. Ages 6-10."
     };
 
+    // EASY MODE - Christmas prompts
+    const christmasPromptsEasy: Record<string, string> = {
+      "Papai Noel": "BLACK AND WHITE COLORING PAGE ONLY! Simple Santa Claus: big round face with simple beard, happy smile, basic hat with pom-pom, simple belt. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO gray, NO colors. Traditional coloring book. Ages 3-7.",
+      "Árvore de Natal": "BLACK AND WHITE COLORING PAGE ONLY! Simple Christmas tree: big triangle shape, 4-5 basic ornaments (circles), simple star on top, basic trunk. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO patterns, NO shading, NO colors. Traditional coloring book. Ages 3-7.",
+      "Presentes": "BLACK AND WHITE COLORING PAGE ONLY! 3 simple gift boxes: rectangles with basic bows on top, simple ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO patterns, NO decorations, NO shading. Traditional coloring book. Ages 3-7.",
+      "Renas": "BLACK AND WHITE COLORING PAGE ONLY! One cute reindeer: round head, simple antlers (3 points each), big eyes, round nose, simple body. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO details, NO shading, NO colors. Traditional coloring book. Ages 3-7.",
+      "Bonecos de Neve": "BLACK AND WHITE COLORING PAGE ONLY! Simple snowman: 3 circles stacked, basic hat, simple scarf, stick arms, basic face (dots for eyes and smile). CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO patterns. Traditional coloring book. Ages 3-7.",
+      "Enfeites Natalinos": "BLACK AND WHITE COLORING PAGE ONLY! Simple Christmas decorations: 3-4 basic ornament balls (circles), candy cane (simple curved stick with stripes), simple bell, basic star. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). NO details, NO shading. Traditional coloring book. Ages 3-7."
+    };
+
+    // HARD MODE - Christmas prompts
+    const christmasPromptsHard: Record<string, string> = {
+      "Papai Noel": "BLACK AND WHITE COLORING PAGE ONLY! Santa with moderate detail: detailed beard with curls, expressive eyes, detailed hat with fur trim, belt with buckle, simple bag. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
+      "Árvore de Natal": "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with moderate detail: layered branches, 8-10 ornaments (various shapes), detailed star, garland, simple presents underneath. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic decorations. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
+      "Presentes": "BLACK AND WHITE COLORING PAGE ONLY! 4-5 gift boxes with moderate detail: various sizes, detailed bows, ribbon patterns, basic decorative wrapping designs. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
+      "Renas": "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with moderate detail: detailed antlers, expressive face, simple harness with bells, basic body details, simple sleigh element. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic details. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
+      "Bonecos de Neve": "BLACK AND WHITE COLORING PAGE ONLY! Snowman with moderate detail: 3 snowballs, detailed scarf with pattern, top hat with band, stick arms with mittens, detailed face with carrot nose, button details. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add basic patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10.",
+      "Enfeites Natalinos": "BLACK AND WHITE COLORING PAGE ONLY! Christmas decorations with moderate detail: detailed ornament balls with patterns, candy canes with stripes, bells with bows, stars with details, holly leaves with berries. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). THICK lines (6-8px). Add decorative patterns. NO shading, NO colors. Moderate coloring book. Ages 6-10."
+    };
+
     // Select the right prompt set based on difficulty and mode
     let prompts: Record<string, string>;
-    if (isChristianMode) {
+    if (isChristmasMode) {
+      prompts = difficulty === "hard" ? christmasPromptsHard : christmasPromptsEasy;
+    } else if (isChristianMode) {
       prompts = difficulty === "hard" ? christianPromptsHard : christianPromptsEasy;
     } else {
       prompts = difficulty === "hard" ? regularPromptsHard : regularPromptsEasy;
     }
 
-    const prompt = prompts[category] || (isChristianMode ? christianPromptsEasy["Símbolos Cristãos"] : regularPromptsEasy["Animais Fofos"]);
+    const defaultPrompt = isChristmasMode 
+      ? christmasPromptsEasy["Árvore de Natal"] 
+      : (isChristianMode ? christianPromptsEasy["Símbolos Cristãos"] : regularPromptsEasy["Animais Fofos"]);
+    
+    const prompt = prompts[category] || defaultPrompt;
 
     console.log('Calling AI gateway with prompt:', prompt);
 

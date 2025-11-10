@@ -11,9 +11,10 @@ import { PersistentBanner } from "./PersistentBanner";
 interface DrawingGeneratorProps {
   selectedCategory?: string;
   isChristianMode?: boolean;
+  isChristmasMode?: boolean;
 }
 
-const DrawingGenerator = ({ selectedCategory, isChristianMode = false }: DrawingGeneratorProps) => {
+const DrawingGenerator = ({ selectedCategory, isChristianMode = false, isChristmasMode = false }: DrawingGeneratorProps) => {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showColoring, setShowColoring] = useState(false);
@@ -58,6 +59,7 @@ useEffect(() => {
         body: { 
           category: selectedCategory,
           isChristianMode: isChristianMode,
+          isChristmasMode: isChristmasMode,
           difficulty: difficulty
         }
       });

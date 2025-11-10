@@ -2,19 +2,22 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Sparkles, Download, Palette, Heart, Rocket, Trees, Car, Briefcase, Cake, PenTool } from "lucide-react";
+import { Sparkles, Download, Palette, Heart, Rocket, Trees, Car, Briefcase, Cake, PenTool, Gift, Candy, TreePine } from "lucide-react";
 import DrawingGenerator from "@/components/DrawingGenerator";
 import { FreeDrawCanvas } from "@/components/FreeDrawCanvas";
 import { FloatingChristianButton } from "@/components/FloatingChristianButton";
+import { SnowEffect } from "@/components/SnowEffect";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [isChristianMode, setIsChristianMode] = useState(false);
+  const [isChristmasMode, setIsChristmasMode] = useState(false);
   const generatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-christian-mode', String(isChristianMode));
-  }, [isChristianMode]);
+    document.documentElement.setAttribute('data-christmas-mode', String(isChristmasMode));
+  }, [isChristianMode, isChristmasMode]);
   
   const scrollToGenerator = () => {
     generatorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -38,23 +41,52 @@ const Index = () => {
     { name: "Valores Cristãos", icon: Heart, color: "fun-yellow" },
   ];
 
-  const categories = isChristianMode ? christianCategories : normalCategories;
+  const christmasCategories = [
+    { name: "Papai Noel", icon: Gift, color: "fun-pink" },
+    { name: "Árvore de Natal", icon: TreePine, color: "fun-green" },
+    { name: "Presentes", icon: Gift, color: "fun-yellow" },
+    { name: "Renas", icon: Heart, color: "fun-pink" },
+    { name: "Bonecos de Neve", icon: Sparkles, color: "fun-blue" },
+    { name: "Enfeites Natalinos", icon: Candy, color: "fun-pink" },
+  ];
+
+  const categories = isChristmasMode ? christmasCategories : (isChristianMode ? christianCategories : normalCategories);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted pb-8 transition-colors duration-500">
+    <div className={`min-h-screen pb-8 transition-colors duration-500 ${
+      isChristmasMode 
+        ? 'bg-gradient-to-b from-red-50 via-white to-green-50' 
+        : 'bg-gradient-to-b from-background to-muted'
+    }`}>
+      {isChristmasMode && <SnowEffect />}
+      
       {/* Header */}
       <header className="container mx-auto px-3 md:px-4 py-4 md:py-6">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Palette className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+            {isChristmasMode ? (
+              <Gift className="w-6 h-6 md:w-8 md:h-8 text-red-600 animate-bounce" />
+            ) : (
+              <Palette className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+            )}
             <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground">
-              {isChristianMode ? "✝️ Desenhos Cristãos" : "Colorindo Alegria"}
+              {isChristmasMode ? "🎄 Natal Mágico" : (isChristianMode ? "✝️ Desenhos Cristãos" : "Colorindo Alegria")}
             </h1>
           </div>
           
           <FloatingChristianButton 
-            isChristianMode={isChristianMode} 
-            onToggle={() => setIsChristianMode(!isChristianMode)} 
+            isChristianMode={isChristianMode}
+            isChristmasMode={isChristmasMode}
+            onToggleChristian={() => {
+              setIsChristianMode(!isChristianMode);
+              if (!isChristianMode) setIsChristmasMode(false);
+            }}
+            onToggleChristmas={() => {
+              setIsChristmasMode(!isChristmasMode);
+              if (!isChristmasMode) {
+                setIsChristianMode(false);
+              }
+            }}
           />
         </nav>
       </header>
@@ -98,16 +130,20 @@ const Index = () => {
 
           <div className="space-y-4 md:space-y-6">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight px-2 animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "backwards" }}>
-              {isChristianMode 
-                ? "Desenhos Cristãos para Colorir" 
-                : "Desenhos Mágicos para Crianças"
+              {isChristmasMode
+                ? "Natal Mágico para Colorir" 
+                : (isChristianMode 
+                  ? "Desenhos Cristãos para Colorir" 
+                  : "Desenhos Mágicos para Crianças")
               }
             </h2>
             
             <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto px-4 animate-fade-in" style={{ animationDelay: "0.6s", animationFillMode: "backwards" }}>
-              {isChristianMode 
-                ? "Ensine valores eternos através da arte" 
-                : "Crie, imprima e divirta-se colorindo"
+              {isChristmasMode
+                ? "Celebre o espírito natalino com arte" 
+                : (isChristianMode 
+                  ? "Ensine valores eternos através da arte" 
+                  : "Crie, imprima e divirta-se colorindo")
               }
             </p>
           </div>
@@ -128,7 +164,7 @@ const Index = () => {
       {/* Categories Section */}
       <section className="container mx-auto px-3 md:px-4 py-8 md:py-16">
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-foreground px-2">
-          {isChristianMode ? "Temas Bíblicos" : "Escolha sua Categoria"}
+          {isChristmasMode ? "Temas Natalinos" : (isChristianMode ? "Temas Bíblicos" : "Escolha sua Categoria")}
         </h3>
         {selectedCategory && (
           <p className="text-center text-sm md:text-lg text-muted-foreground mb-6 md:mb-8 px-4">
@@ -191,9 +227,10 @@ const Index = () => {
               Gere seu Desenho
             </h3>
             <DrawingGenerator 
-              key={isChristianMode ? 'christian' : 'normal'} 
+              key={isChristmasMode ? 'christmas' : (isChristianMode ? 'christian' : 'normal')} 
               selectedCategory={selectedCategory} 
-              isChristianMode={isChristianMode} 
+              isChristianMode={isChristianMode}
+              isChristmasMode={isChristmasMode}
             />
           </TabsContent>
           

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Canvas as FabricCanvas, PencilBrush } from "fabric";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Eraser, Download, RotateCcw, Pencil, Sparkles, Printer, Undo2, Redo2, PaintBucket } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { Eraser, Download, RotateCcw, Pencil, Sparkles, Printer, Undo2, Redo2 } from "lucide-react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 
@@ -283,18 +284,23 @@ export const FreeDrawCanvas = () => {
         </Button>
       </div>
 
-      {/* Brush Size */}
-      <div className="flex items-center gap-3 justify-center">
-        <span className="text-sm font-medium">Espessura:</span>
-        <input
-          type="range"
-          min="1"
-          max="30"
-          value={brushSize}
-          onChange={(e) => setBrushSize(Number(e.target.value))}
-          className="w-32 md:w-48 h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-manipulation"
-        />
-        <span className="text-sm font-bold w-8">{brushSize}</span>
+      {/* Brush Size Slider */}
+      <div className="flex flex-col gap-2 items-center justify-center max-w-md mx-auto">
+        <div className="flex items-center gap-3 w-full">
+          <span className="text-sm font-medium whitespace-nowrap">Espessura:</span>
+          <Slider
+            value={[brushSize]}
+            onValueChange={(value) => setBrushSize(value[0])}
+            min={1}
+            max={30}
+            step={1}
+            className="flex-1"
+          />
+          <div className="w-12 h-12 rounded-full border-4 border-primary flex items-center justify-center bg-muted">
+            <span className="text-sm font-bold text-primary">{brushSize}</span>
+          </div>
+        </div>
+        <p className="text-xs text-muted-foreground">Ajuste a espessura do pincel ou borracha</p>
       </div>
 
       {/* Color Palette */}
