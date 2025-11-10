@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './styles/floating-button.css';
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 48 100% 96%;
+    --foreground: 240 10% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 20%;
+
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 80% 75%;
+    --secondary-foreground: 240 10% 20%;
+
+    --muted: 48 50% 90%;
+    --muted-foreground: 240 5% 50%;
+
+    --accent: 142 76% 73%;
+    --accent-foreground: 240 10% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 48 30% 85%;
+    --input: 48 30% 85%;
+    --ring: 340 82% 52%;
+
+    --radius: 1rem;
+
+    --fun-yellow: 48 100% 70%;
+    --fun-blue: 200 80% 75%;
+    --fun-green: 142 76% 73%;
+    --fun-pink: 340 82% 80%;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Tema Cristão */
+  [data-christian-mode="true"] {
+    --background: 220 30% 96%;
+    --foreground: 220 20% 15%;
+
+    --card: 220 20% 98%;
+    --card-foreground: 220 20% 15%;
+
+    --primary: 220 70% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 80% 60%;
+    --secondary-foreground: 220 20% 15%;
+
+    --muted: 220 20% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 40 90% 65%;
+    --accent-foreground: 220 20% 15%;
+
+    --border: 220 20% 88%;
+    --input: 220 20% 88%;
+    --ring: 220 70% 45%;
+
+    --fun-yellow: 40 100% 60%;
+    --fun-blue: 220 70% 65%;
+    --fun-green: 160 50% 55%;
+    --fun-pink: 340 60% 65%;
+  }
+
+  .dark {
+    --background: 240 10% 15%;
+    --foreground: 48 100% 96%;
+
+    --card: 240 10% 20%;
+    --card-foreground: 48 100% 96%;
+
+    --popover: 240 10% 20%;
+    --popover-foreground: 48 100% 96%;
+
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 80% 75%;
+    --secondary-foreground: 240 10% 20%;
+
+    --muted: 240 10% 25%;
+    --muted-foreground: 48 20% 70%;
+
+    --accent: 142 76% 73%;
+    --accent-foreground: 240 10% 20%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 25%;
+    --input: 240 10% 25%;
+    --ring: 340 82% 52%;
+    
+    --fun-yellow: 48 100% 70%;
+    --fun-blue: 200 80% 75%;
+    --fun-green: 142 76% 73%;
+    --fun-pink: 340 82% 80%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improve touch responsiveness */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better mobile scrolling */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Gradient radial utility */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+}
+
+/* Mobile-friendly utilities */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (max-width: 768px) {
+  /* Larger touch targets for mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
