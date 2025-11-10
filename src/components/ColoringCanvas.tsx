@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Canvas as FabricCanvas, PencilBrush, FabricImage } from "fabric";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Eraser, Download, RotateCcw, Pencil, PaintBucket, Sparkles, Printer, Undo2, Redo2 } from "lucide-react";
+import { Eraser, Download, RotateCcw, Pencil, PaintBucket, Sparkles, Printer, Undo2, Redo2, Maximize2, X } from "lucide-react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 
@@ -33,6 +33,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const [isFinished, setIsFinished] = useState(false);
   const [canvasHistory, setCanvasHistory] = useState<string[]>([]);
   const [historyStep, setHistoryStep] = useState(-1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current) return;
@@ -403,6 +404,7 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   };
 
   return (
+    <>
     <Card className="p-4 space-y-4">
       {/* Tools */}
       <div className="flex flex-wrap gap-2 items-center justify-center">
@@ -470,6 +472,15 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
         >
           <Download className="w-5 h-5 mr-2" />
           Baixar
+        </Button>
+        <Button
+          size="lg"
+          variant="outline"
+          onClick={() => setIsFullscreen(true)}
+          className="touch-manipulation"
+        >
+          <Maximize2 className="w-5 h-5 mr-2" />
+          Expandir
         </Button>
         {isFinished && (
           <Button
@@ -547,5 +558,139 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
         </div>
       )}
     </Card>
+    
+    {/* Fullscreen Mode */}
+    {isFullscreen && (
+      <div className="fixed inset-0 z-[9999] bg-background flex flex-col">
+        {/* Header with close button */}
+        <div className="flex items-center justify-between p-4 border-b border-border">
+          <h3 className="text-lg font-bold">Modo Tela Cheia</h3>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => setIsFullscreen(false)}
+            className="touch-manipulation"
+          >
+            <X className="w-5 h-5" />
+          </Button>
+        </div>
+        
+        <div className="flex-1 flex gap-4 p-4 overflow-hidden">
+          {/* Canvas Area */}
+          <div className="flex-1 flex items-center justify-center bg-muted/30 rounded-lg overflow-auto">
+            <div 
+              className="flex justify-center items-center touch-manipulation"
+              style={{ touchAction: "none" }}
+            >
+              <canvas ref={canvasRef} />
+            </div>
+          </div>
+          
+          {/* Sidebar with tools and colors */}
+          <div className="w-80 flex flex-col gap-4 overflow-y-auto">
+            {/* Tools */}
+            <div className="flex flex-col gap-2">
+              <Button
+                size="lg"
+                variant={activeTool === "draw" ? "default" : "outline"}
+                onClick={() => setActiveTool("draw")}
+                className="w-full touch-manipulation justify-start"
+              >
+                <Pencil className="w-5 h-5 mr-2" />
+                Pincel
+              </Button>
+              <Button
+                size="lg"
+                variant={activeTool === "fill" ? "default" : "outline"}
+                onClick={() => setActiveTool("fill")}
+                className="w-full touch-manipulation justify-start"
+              >
+                <PaintBucket className="w-5 h-5 mr-2" />
+                Balde
+              </Button>
+              <Button
+                size="lg"
+                variant={activeTool === "erase" ? "default" : "outline"}
+                onClick={() => setActiveTool("erase")}
+                className="w-full touch-manipulation justify-start"
+              >
+                <Eraser className="w-5 h-5 mr-2" />
+                Borracha
+              </Button>
+            </div>
+            
+            {/* Brush Size */}
+            {activeTool !== "fill" && (
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium">Tamanho: {brushSize}</label>
+                <input
+                  type="range"
+                  min="5"
+                  max="30"
+                  value={brushSize}
+                  onChange={(e) => setBrushSize(Number(e.target.value))}
+                  className="w-full touch-manipulation"
+                />
+              </div>
+            )}
+            
+            {/* Color Palette */}
+            {(activeTool === "draw" || activeTool === "fill") && (
+              <div className="flex-1">
+                <label className="text-sm font-medium mb-2 block">Cores:</label>
+                <div className="grid grid-cols-5 gap-2">
+                  {COLORS.map((color) => (
+                    <button
+                      key={color}
+                      onClick={() => setActiveColor(color)}
+                      className={`w-full aspect-square rounded-lg border-4 transition-transform hover:scale-110 touch-manipulation ${
+                        activeColor === color ? "border-primary scale-110 shadow-lg" : "border-transparent"
+                      }`}
+                      style={{ backgroundColor: color }}
+                      aria-label={`Cor ${color}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-2">
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={handleUndo}
+                disabled={historyStep <= 0}
+                className="w-full touch-manipulation"
+              >
+                <Undo2 className="w-5 h-5 mr-2" />
+                Desfazer
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={handleRedo}
+                disabled={historyStep >= canvasHistory.length - 1}
+                className="w-full touch-manipulation"
+              >
+                <Redo2 className="w-5 h-5 mr-2" />
+                Refazer
+              </Button>
+              {!isFinished && (
+                <Button
+                  size="lg"
+                  onClick={handleFinish}
+                  className="w-full touch-manipulation bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
+                >
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Finalizar
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 };

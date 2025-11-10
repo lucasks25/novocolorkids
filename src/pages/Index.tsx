@@ -65,11 +65,26 @@ const Index = () => {
           {/* Mascot Area */}
           <div className="flex justify-center mb-4 md:mb-8">
             <div className="relative">
-              <div className="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 bg-gradient-to-br from-fun-yellow to-primary rounded-full flex items-center justify-center shadow-2xl animate-bounce">
-                <Palette className="w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white" strokeWidth={2} />
-              </div>
-              <Sparkles className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 text-fun-yellow animate-pulse" />
-              <Sparkles className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-4 h-4 md:w-6 md:h-6 text-fun-pink animate-pulse" />
+              {isChristianMode ? (
+                // Cruz para modo cristão
+                <div className="relative w-24 h-32 md:w-32 md:h-40 lg:w-48 lg:h-56 animate-bounce">
+                  {/* Cruz vertical */}
+                  <div className="absolute left-1/2 top-4 -translate-x-1/2 w-8 md:w-12 lg:w-16 h-24 md:h-32 lg:h-44 bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
+                  {/* Cruz horizontal */}
+                  <div className="absolute left-1/2 top-10 md:top-12 lg:top-16 -translate-x-1/2 w-20 md:w-28 lg:w-40 h-8 md:h-12 lg:h-16 bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 rounded-xl shadow-2xl" />
+                  <Sparkles className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 text-yellow-400 animate-pulse" />
+                  <Sparkles className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-4 h-4 md:w-6 md:h-6 text-amber-400 animate-pulse" />
+                </div>
+              ) : (
+                // Paleta para modo normal
+                <div className="relative">
+                  <div className="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 bg-gradient-to-br from-fun-yellow to-primary rounded-full flex items-center justify-center shadow-2xl animate-bounce">
+                    <Palette className="w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 text-white" strokeWidth={2} />
+                  </div>
+                  <Sparkles className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-6 h-6 md:w-8 md:h-8 text-fun-yellow animate-pulse" />
+                  <Sparkles className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-4 h-4 md:w-6 md:h-6 text-fun-pink animate-pulse" />
+                </div>
+              )}
             </div>
           </div>
 
