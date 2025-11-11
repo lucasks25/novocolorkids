@@ -38,6 +38,10 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const [showPalette, setShowPalette] = useState(false);
   const [savedCanvasState, setSavedCanvasState] = useState<string | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [isPanning, setIsPanning] = useState(false);
+  const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
+  const [lastPanPoint, setLastPanPoint] = useState({ x: 0, y: 0 });
+  const [panMode, setPanMode] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -404,14 +408,73 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
 
   const handleZoomReset = () => {
     setZoomLevel(1);
+    setPanPosition({ x: 0, y: 0 });
+    setPanMode(false);
   };
 
   useEffect(() => {
     if (fabricCanvas && isFullscreen) {
-      fabricCanvas.setZoom(zoomLevel);
+      // Aplicar zoom e pan
+      const vpt = fabricCanvas.viewportTransform;
+      if (vpt) {
+        vpt[0] = zoomLevel;
+        vpt[3] = zoomLevel;
+        vpt[4] = panPosition.x;
+        vpt[5] = panPosition.y;
+      }
+      fabricCanvas.setViewportTransform(vpt || [zoomLevel, 0, 0, zoomLevel, panPosition.x, panPosition.y]);
       fabricCanvas.renderAll();
     }
-  }, [zoomLevel, fabricCanvas, isFullscreen]);
+  }, [zoomLevel, panPosition, fabricCanvas, isFullscreen]);
+
+  // Pan functionality quando com zoom
+  useEffect(() => {
+    if (!fabricCanvas || !isFullscreen || zoomLevel <= 1) return;
+
+    const handleMouseDown = (e: any) => {
+      // Permitir pan se estiver em modo pan OU usando Alt/Ctrl
+      if (!panMode && activeTool !== "fill" && !e.e?.altKey && !e.e?.ctrlKey) return;
+      
+      const evt = e.e;
+      setIsPanning(true);
+      setLastPanPoint({ x: evt.clientX, y: evt.clientY });
+      fabricCanvas.selection = false;
+      fabricCanvas.isDrawingMode = false;
+    };
+
+    const handleMouseMove = (e: any) => {
+      if (!isPanning) return;
+      
+      const evt = e.e;
+      const deltaX = evt.clientX - lastPanPoint.x;
+      const deltaY = evt.clientY - lastPanPoint.y;
+      
+      setPanPosition(prev => ({
+        x: prev.x + deltaX,
+        y: prev.y + deltaY
+      }));
+      
+      setLastPanPoint({ x: evt.clientX, y: evt.clientY });
+    };
+
+    const handleMouseUp = () => {
+      setIsPanning(false);
+      fabricCanvas.selection = true;
+      if (activeTool === "draw" || activeTool === "erase") {
+        fabricCanvas.isDrawingMode = !panMode;
+      }
+    };
+
+    fabricCanvas.on('mouse:down', handleMouseDown);
+    fabricCanvas.on('mouse:move', handleMouseMove);
+    fabricCanvas.on('mouse:up', handleMouseUp);
+
+    return () => {
+      fabricCanvas.off('mouse:down', handleMouseDown);
+      fabricCanvas.off('mouse:move', handleMouseMove);
+      fabricCanvas.off('mouse:up', handleMouseUp);
+    };
+  }, [fabricCanvas, isFullscreen, isPanning, lastPanPoint, zoomLevel, activeTool, panMode]);
 
   const handlePrint = () => {
     if (!fabricCanvas) return;
@@ -704,34 +767,57 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
         </div>
         
         {/* Zoom Controls */}
-        <div className="flex items-center gap-2 justify-center py-2 px-4 border-b border-border">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handleZoomOut}
-            className="touch-manipulation"
-          >
-            <span className="text-lg">-</span>
-          </Button>
-          <span className="text-sm font-medium min-w-[80px] text-center">
-            Zoom: {Math.round(zoomLevel * 100)}%
-          </span>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handleZoomIn}
-            className="touch-manipulation"
-          >
-            <span className="text-lg">+</span>
-          </Button>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={handleZoomReset}
-            className="touch-manipulation"
-          >
-            Reset
-          </Button>
+        <div className="flex flex-col gap-2 py-2 px-4 border-b border-border">
+          <div className="flex items-center gap-2 justify-center flex-wrap">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleZoomOut}
+              className="touch-manipulation"
+            >
+              <span className="text-lg">-</span>
+            </Button>
+            <span className="text-sm font-medium min-w-[80px] text-center">
+              Zoom: {Math.round(zoomLevel * 100)}%
+            </span>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleZoomIn}
+              className="touch-manipulation"
+            >
+              <span className="text-lg">+</span>
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleZoomReset}
+              className="touch-manipulation"
+            >
+              Reset
+            </Button>
+            {zoomLevel > 1 && (
+              <Button
+                size="sm"
+                variant={panMode ? "default" : "outline"}
+                onClick={() => setPanMode(!panMode)}
+                className="touch-manipulation"
+              >
+                <span className="text-base mr-1">✋</span>
+                {panMode ? "Colorir" : "Mover"}
+              </Button>
+            )}
+          </div>
+          {zoomLevel > 1 && !panMode && (
+            <div className="text-xs text-center text-muted-foreground animate-pulse">
+              💡 Clique no botão "Mover" para navegar pela imagem
+            </div>
+          )}
+          {panMode && (
+            <div className="text-xs text-center text-primary font-medium animate-pulse">
+              👆 Arraste para mover • Clique "Colorir" para voltar a pintar
+            </div>
+          )}
         </div>
         {activeTool !== "fill" && (
           <div className="flex items-center gap-3 justify-center py-2 px-4 border-b border-border">
