@@ -183,9 +183,9 @@ serve(async (req) => {
     // EASY MODE - Christmas prompts with variations
     const christmasPromptsEasy: Record<string, string[]> = {
       "Papai Noel": [
-        "BLACK AND WHITE COLORING PAGE ONLY! Santa's face with big beard, happy smile, simple hat with pom-pom. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa face with big beard, happy smile, simple hat with pom-pom. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Santa waving with one hand, simple belt, boots, big smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Santa's head with glasses, beard, hat, jolly expression. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa head with glasses, beard, hat, jolly expression. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
       ],
       "Árvore de Natal": [
         "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree triangle shape with star on top, 5 round ornaments, simple trunk. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
