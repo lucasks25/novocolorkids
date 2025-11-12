@@ -66,27 +66,10 @@ useEffect(() => {
         }
       });
 
-      if (error && (error as any).status === 402) {
-        toast.error("Sem créditos Lovable! Adicione créditos para gerar desenhos ilimitados. 🎨", {
-          duration: 5000
-        });
-        setStatusMessage(null);
-        return;
-      }
-
-      if (error) {
-        console.error('Error generating drawing:', error);
-        toast.error("Erro ao gerar desenho. Tente novamente!");
-        setStatusMessage(null);
-        return;
-      }
-
-      // Check if response indicates to use offline mode (no credits)
-      if (data?.useOffline) {
-        toast.error("Sem créditos Lovable! Adicione créditos para gerar desenhos ilimitados. 🎨", {
-          duration: 5000
-        });
-        setStatusMessage(null);
+      // If error or offline mode response, use offline library
+      if (error || data?.useOffline) {
+        console.log('Using offline drawing library');
+        useOfflineDrawing();
         return;
       }
 
@@ -96,13 +79,13 @@ useEffect(() => {
         setShowColoring(false);
         toast.success("Desenho gerado com sucesso! 🎉");
       } else {
-        toast.error("Erro ao gerar desenho. Tente novamente!");
-        setStatusMessage(null);
+        console.log('No image URL, using offline library');
+        useOfflineDrawing();
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error("Erro de conexão. Verifique sua internet e tente novamente!");
-      setStatusMessage(null);
+      // Fallback para biblioteca offline em caso de erro
+      useOfflineDrawing();
     } finally {
       setIsGenerating(false);
     }
@@ -115,6 +98,7 @@ useEffect(() => {
     setGeneratedImage(offlineDrawing.url);
     setCurrentCategory(selectedCategory || offlineDrawing.category);
     setShowColoring(false);
+    toast.success("Desenho carregado da biblioteca! 🎨");
   };
 
   const downloadAsPDF = () => {

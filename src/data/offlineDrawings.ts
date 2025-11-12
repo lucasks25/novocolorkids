@@ -60,6 +60,58 @@ import angel2 from "@/assets/offline/angel-2.png";
 import fishEasy from "@/assets/offline/fish-easy.png";
 import whaleEasy from "@/assets/offline/whale-easy.png";
 
+// NOVAS IMAGENS GERADAS (Lote 2024)
+import dogEasy1 from "@/assets/offline/dog-easy-1.png";
+import catEasy1 from "@/assets/offline/cat-easy-1.png";
+import bunnyEasy1 from "@/assets/offline/bunny-easy-1.png";
+import bearEasy1 from "@/assets/offline/bear-easy-1.png";
+import elephantEasy2 from "@/assets/offline/elephant-easy-2.png";
+import lionEasy2 from "@/assets/offline/lion-easy-2.png";
+import giraffeEasy2 from "@/assets/offline/giraffe-easy-2.png";
+import monkeyEasy2 from "@/assets/offline/monkey-easy-2.png";
+import pandaEasy1 from "@/assets/offline/panda-easy-1.png";
+import zebraEasy1 from "@/assets/offline/zebra-easy-1.png";
+import koalaEasy1 from "@/assets/offline/koala-easy-1.png";
+import tigerEasy1 from "@/assets/offline/tiger-easy-1.png";
+import raccoonEasy1 from "@/assets/offline/raccoon-easy-1.png";
+import christmasTreeEasy1 from "@/assets/offline/christmas-tree-easy-1.png";
+import santaEasy2 from "@/assets/offline/santa-easy-2.png";
+import snowmanEasy2 from "@/assets/offline/snowman-easy-2.png";
+import reindeerEasy2 from "@/assets/offline/reindeer-easy-2.png";
+import giftsEasy2 from "@/assets/offline/gifts-easy-2.png";
+import ornamentEasy2 from "@/assets/offline/ornament-easy-2.png";
+import jesusChildrenEasy1 from "@/assets/offline/jesus-children-easy-1.png";
+import crossEasy1 from "@/assets/offline/cross-easy-1.png";
+import angelEasy2 from "@/assets/offline/angel-easy-2.png";
+import churchEasy2 from "@/assets/offline/church-easy-2.png";
+import bibleEasy2 from "@/assets/offline/bible-easy-2.png";
+import prayerEasy2 from "@/assets/offline/prayer-easy-2.png";
+import sunEasy1 from "@/assets/offline/sun-easy-1.png";
+import rainbowEasy2 from "@/assets/offline/rainbow-easy-2.png";
+import sunflowerEasy2 from "@/assets/offline/sunflower-easy-2.png";
+import treeEasy2 from "@/assets/offline/tree-easy-2.png";
+import carEasy2 from "@/assets/offline/car-easy-2.png";
+import squirrelEasy1 from "@/assets/offline/squirrel-easy-1.png";
+import dinosaurEasy1 from "@/assets/offline/dinosaur-easy-1.png";
+import frogEasy1 from "@/assets/offline/frog-easy-1.png";
+import snailEasy1 from "@/assets/offline/snail-easy-1.png";
+import owlEasy1 from "@/assets/offline/owl-easy-1.png";
+import ladybugEasy1 from "@/assets/offline/ladybug-easy-1.png";
+import airplaneEasy2 from "@/assets/offline/airplane-easy-2.png";
+import trainEasy2 from "@/assets/offline/train-easy-2.png";
+import boatEasy2 from "@/assets/offline/boat-easy-2.png";
+import busEasy2 from "@/assets/offline/bus-easy-2.png";
+import rocketEasy2 from "@/assets/offline/rocket-easy-2.png";
+import astronautEasy2 from "@/assets/offline/astronaut-easy-2.png";
+import moonEasy1 from "@/assets/offline/moon-easy-1.png";
+import planetEasy2 from "@/assets/offline/planet-easy-2.png";
+import doctorEasy2 from "@/assets/offline/doctor-easy-2.png";
+import firefighterEasy2 from "@/assets/offline/firefighter-easy-2.png";
+import teacherEasy1 from "@/assets/offline/teacher-easy-1.png";
+import chefEasy1 from "@/assets/offline/chef-easy-1.png";
+import policeEasy1 from "@/assets/offline/police-easy-1.png";
+import farmerEasy1 from "@/assets/offline/farmer-easy-1.png";
+
 // Novas categorias completas
 import car2 from "@/assets/offline/car-2.png";
 import airplaneEasy from "@/assets/offline/airplane-easy.png";
@@ -365,7 +417,73 @@ export const offlineDrawings: OfflineDrawing[] = [
   
   // Natal - Bonecos de Neve (categoria exata)
   { url: snowmanImage, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco de Neve" },
-  { url: snowman2, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cachecol" }
+  { url: snowman2, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cachecol" },
+  
+  // === NOVAS IMAGENS GERADAS (2024) - 50+ desenhos adicionais ===
+  
+  // Animais variados - fácil (lote 1)
+  { url: dogEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Cachorro Sentado" },
+  { url: catEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Gatinho Brincando" },
+  { url: bunnyEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Coelhinho Alegre" },
+  { url: bearEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Ursinho de Pelúcia" },
+  { url: elephantEasy2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Elefante Bebê" },
+  { url: lionEasy2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Leãozinho Fofo" },
+  { url: giraffeEasy2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Girafa Sorridente" },
+  { url: monkeyEasy2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Macaquinho Pendurado" },
+  { url: pandaEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Panda com Bambu" },
+  { url: zebraEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Zebra Listrada" },
+  { url: koalaEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Coala na Árvore" },
+  { url: tigerEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Tigrinho Sentado" },
+  { url: raccoonEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Guaxinim Fofo" },
+  { url: squirrelEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Esquilo com Noz" },
+  { url: dinosaurEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Dinossauro Amigável" },
+  { url: frogEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Sapinho na Folha" },
+  { url: snailEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Caracol Sorridente" },
+  { url: owlEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Coruja no Galho" },
+  { url: ladybugEasy1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Joaninha Bonitinha" },
+  
+  // Natal - novas variações
+  { url: christmasTreeEasy1, category: "Árvore de Natal", mode: "christmas", difficulty: "easy", name: "Árvore Sorridente" },
+  { url: santaEasy2, category: "Papai Noel", mode: "christmas", difficulty: "easy", name: "Papai Noel Acenando" },
+  { url: snowmanEasy2, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cartola" },
+  { url: reindeerEasy2, category: "Renas", mode: "christmas", difficulty: "easy", name: "Rena com Nariz Vermelho" },
+  { url: giftsEasy2, category: "Presentes", mode: "christmas", difficulty: "easy", name: "Caixa de Presente" },
+  { url: ornamentEasy2, category: "Enfeites Natalinos", mode: "christmas", difficulty: "easy", name: "Bola Decorada" },
+  
+  // Cristão - novas variações
+  { url: jesusChildrenEasy1, category: "Histórias Bíblicas", mode: "christian", difficulty: "easy", name: "Jesus e as Crianças" },
+  { url: crossEasy1, category: "Símbolos Cristãos", mode: "christian", difficulty: "easy", name: "Cruz Grande" },
+  { url: angelEasy2, category: "Personagens da Bíblia", mode: "christian", difficulty: "easy", name: "Anjo com Asas" },
+  { url: churchEasy2, category: "Templo e Igreja", mode: "christian", difficulty: "easy", name: "Igreja com Cruz" },
+  { url: bibleEasy2, category: "Versículos", mode: "christian", difficulty: "easy", name: "Bíblia com Cruz" },
+  { url: prayerEasy2, category: "Valores Cristãos", mode: "christian", difficulty: "easy", name: "Mãos Orando" },
+  
+  // Natureza - novas variações
+  { url: sunEasy1, category: "Natureza", mode: "normal", difficulty: "easy", name: "Sol com Raios" },
+  { url: rainbowEasy2, category: "Natureza", mode: "normal", difficulty: "easy", name: "Arco-íris com Nuvens" },
+  { url: sunflowerEasy2, category: "Natureza", mode: "normal", difficulty: "easy", name: "Girassol Grande" },
+  { url: treeEasy2, category: "Natureza", mode: "normal", difficulty: "easy", name: "Árvore com Folhas" },
+  
+  // Transportes - novas variações
+  { url: carEasy2, category: "Transportes", mode: "normal", difficulty: "easy", name: "Carrinho Sorrindo" },
+  { url: airplaneEasy2, category: "Transportes", mode: "normal", difficulty: "easy", name: "Avião com Hélice" },
+  { url: trainEasy2, category: "Transportes", mode: "normal", difficulty: "easy", name: "Trem Locomotiva" },
+  { url: boatEasy2, category: "Transportes", mode: "normal", difficulty: "easy", name: "Barquinho a Vela" },
+  { url: busEasy2, category: "Transportes", mode: "normal", difficulty: "easy", name: "Ônibus Escolar" },
+  
+  // Espaço - novas variações
+  { url: rocketEasy2, category: "Espaço", mode: "normal", difficulty: "easy", name: "Foguete Decolando" },
+  { url: astronautEasy2, category: "Espaço", mode: "normal", difficulty: "easy", name: "Astronauta Acenando" },
+  { url: moonEasy1, category: "Espaço", mode: "normal", difficulty: "easy", name: "Lua com Estrelas" },
+  { url: planetEasy2, category: "Espaço", mode: "normal", difficulty: "easy", name: "Planeta Saturno" },
+  
+  // Profissões - novas variações
+  { url: doctorEasy2, category: "Profissões", mode: "normal", difficulty: "easy", name: "Doutor com Maleta" },
+  { url: firefighterEasy2, category: "Profissões", mode: "normal", difficulty: "easy", name: "Bombeira Sorridente" },
+  { url: teacherEasy1, category: "Profissões", mode: "normal", difficulty: "easy", name: "Professora com Livro" },
+  { url: chefEasy1, category: "Profissões", mode: "normal", difficulty: "easy", name: "Chef com Chapéu" },
+  { url: policeEasy1, category: "Profissões", mode: "normal", difficulty: "easy", name: "Policial Acenando" },
+  { url: farmerEasy1, category: "Profissões", mode: "normal", difficulty: "easy", name: "Fazendeiro com Plantas" }
 ];
 
 export const getRandomOfflineDrawing = (

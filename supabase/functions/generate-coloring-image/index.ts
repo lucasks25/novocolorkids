@@ -318,14 +318,14 @@ serve(async (req) => {
       }
     }
     
-    // Return offline mode signal if generation failed or no credits
+    // Return offline mode signal if generation failed or no credits (200 not 402 to avoid frontend error)
     if (!imageUrl) {
-      console.log('Lovable AI: Sem créditos ou falha na geração - é necessário adicionar créditos');
+      console.log('Lovable AI: Sem créditos ou falha na geração - usando biblioteca offline');
       return new Response(JSON.stringify({ 
         useOffline: true,
-        message: "Adicione créditos Lovable para gerar desenhos ilimitados!"
+        message: "Usando biblioteca offline"
       }), {
-        status: 402,
+        status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
