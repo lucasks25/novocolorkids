@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Sparkles, Download, Loader2, Palette } from "lucide-react";
+import { Sparkles, Download, Loader2, Palette, WifiOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import { ColoringCanvas } from "./ColoringCanvas";
 import { PersistentBanner } from "./PersistentBanner";
+import { getRandomOfflineDrawing } from "@/data/offlineDrawings";
 
 interface DrawingGeneratorProps {
   selectedCategory?: string;
@@ -21,6 +22,7 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false, isChristm
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<"easy" | "medium">("easy");
+  const [isOfflineMode, setIsOfflineMode] = useState(false);
 useEffect(() => {
     // Listen for drawing completion to unlock achievement and hide banner
     const handleDrawingComplete = (event: CustomEvent) => {
@@ -54,6 +56,8 @@ useEffect(() => {
 
     setStatusMessage("Gerando desenho...");
     setIsGenerating(true);
+    setIsOfflineMode(false);
+    
     try {
       const { data, error } = await supabase.functions.invoke('generate-coloring-image', {
         body: { 
@@ -64,25 +68,50 @@ useEffect(() => {
         }
       });
 
+      // Verifica se é erro de créditos insuficientes (402)
+      if (error && (error as any).status === 402) {
+        console.log('Sem créditos disponíveis, usando modo offline');
+        useOfflineDrawing();
+        return;
+      }
+
       if (error) {
         console.error('Error generating drawing:', error);
-        throw error;
+        // Tenta usar modo offline em caso de erro de conexão
+        useOfflineDrawing();
+        return;
       }
 
       if (data?.imageUrl) {
         setGeneratedImage(data.imageUrl);
         setCurrentCategory(selectedCategory);
         setShowColoring(false);
+        setIsOfflineMode(false);
         toast.success("Desenho gerado com sucesso!");
       } else {
-        throw new Error("Nenhuma imagem foi gerada");
+        useOfflineDrawing();
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error("Erro ao gerar desenho. Tente novamente!");
+      // Em caso de erro de conexão, usa modo offline
+      useOfflineDrawing();
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  const useOfflineDrawing = () => {
+    const mode = isChristmasMode ? "christmas" : isChristianMode ? "christian" : "normal";
+    const offlineDrawing = getRandomOfflineDrawing(mode, difficulty);
+    
+    setGeneratedImage(offlineDrawing.url);
+    setCurrentCategory(selectedCategory || offlineDrawing.category);
+    setShowColoring(false);
+    setIsOfflineMode(true);
+    
+    toast.info("🎨 Modo Offline: Usando desenho da biblioteca!", {
+      description: "Sem créditos ou conexão? Sem problema! Continue colorindo!"
+    });
   };
 
   const downloadAsPDF = () => {
@@ -191,6 +220,17 @@ useEffect(() => {
 
       {generatedImage && !showColoring && (
         <Card className="p-6 space-y-4">
+          {isOfflineMode && (
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4 flex items-center gap-3">
+              <WifiOff className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+              <div className="text-sm">
+                <p className="font-semibold text-blue-900 dark:text-blue-100">Modo Offline Ativo</p>
+                <p className="text-blue-700 dark:text-blue-300">
+                  Este desenho é da biblioteca offline. Adicione créditos para gerar desenhos personalizados!
+                </p>
+              </div>
+            </div>
+          )}
           <img 
             src={generatedImage} 
             alt="Desenho gerado" 
