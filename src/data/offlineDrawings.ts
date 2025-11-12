@@ -21,6 +21,12 @@ import nativityImage from "@/assets/offline/nativity-medium.png";
 import bibleImage from "@/assets/offline/bible-easy.png";
 import prayerImage from "@/assets/offline/prayer-easy.png";
 import jesusChildrenImage from "@/assets/offline/jesus-children-medium.png";
+import carImage from "@/assets/offline/car-easy.png";
+import rocketImage from "@/assets/offline/rocket-easy.png";
+import cakeImage from "@/assets/offline/cake-easy.png";
+import angelImage from "@/assets/offline/angel-easy.png";
+import churchImage from "@/assets/offline/church-easy.png";
+import noahsArkImage from "@/assets/offline/noahs-ark-easy.png";
 
 interface OfflineDrawing {
   url: string;
@@ -109,6 +115,27 @@ export const offlineDrawings: OfflineDrawing[] = [
     difficulty: "easy",
     name: "Bombeiro Corajoso"
   },
+  {
+    url: carImage,
+    category: "Transportes",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Carrinho Feliz"
+  },
+  {
+    url: rocketImage,
+    category: "Espaço",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Foguete Espacial"
+  },
+  {
+    url: cakeImage,
+    category: "Festas",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Bolo de Aniversário"
+  },
   
   // Desenhos normais - médio
   {
@@ -187,6 +214,27 @@ export const offlineDrawings: OfflineDrawing[] = [
     difficulty: "easy",
     name: "Mãos em Oração"
   },
+  {
+    url: angelImage,
+    category: "Personagens da Bíblia",
+    mode: "christian",
+    difficulty: "easy",
+    name: "Anjo Feliz"
+  },
+  {
+    url: churchImage,
+    category: "Templo e Igreja",
+    mode: "christian",
+    difficulty: "easy",
+    name: "Igreja Simples"
+  },
+  {
+    url: noahsArkImage,
+    category: "Histórias Bíblicas",
+    mode: "christian",
+    difficulty: "easy",
+    name: "Arca de Noé"
+  },
   
   // Desenhos cristãos - médio
   {
@@ -200,24 +248,38 @@ export const offlineDrawings: OfflineDrawing[] = [
 
 export const getRandomOfflineDrawing = (
   mode: "normal" | "christian" | "christmas",
-  difficulty: "easy" | "medium"
+  difficulty: "easy" | "medium",
+  category?: string
 ): OfflineDrawing => {
-  // Filtra desenhos por modo e dificuldade
+  // Primeiro tenta filtrar por modo, dificuldade E categoria
   let filtered = offlineDrawings.filter(
-    d => d.mode === mode && d.difficulty === difficulty
+    d => d.mode === mode && d.difficulty === difficulty && 
+    (!category || d.category === category)
   );
   
-  // Se não houver desenhos para a dificuldade específica, tenta qualquer dificuldade
+  // Se não encontrou com a categoria exata, tenta pelo menos o modo e dificuldade
+  if (filtered.length === 0 && category) {
+    console.log('Nenhum desenho offline encontrado para categoria:', category, 'Tentando sem categoria específica');
+    filtered = offlineDrawings.filter(
+      d => d.mode === mode && d.difficulty === difficulty
+    );
+  }
+  
+  // Se ainda não houver desenhos para a dificuldade específica, tenta qualquer dificuldade do modo
   if (filtered.length === 0) {
+    console.log('Nenhum desenho offline encontrado para dificuldade:', difficulty, 'Tentando qualquer dificuldade');
     filtered = offlineDrawings.filter(d => d.mode === mode);
   }
   
   // Se ainda não houver desenhos para o modo, usa desenhos normais
   if (filtered.length === 0) {
+    console.log('Nenhum desenho offline encontrado para modo:', mode, 'Usando modo normal');
     filtered = offlineDrawings.filter(d => d.mode === "normal");
   }
   
   // Retorna um desenho aleatório
   const randomIndex = Math.floor(Math.random() * filtered.length);
-  return filtered[randomIndex];
+  const selected = filtered[randomIndex];
+  console.log('Desenho offline selecionado:', selected.name, 'Categoria:', selected.category);
+  return selected;
 };

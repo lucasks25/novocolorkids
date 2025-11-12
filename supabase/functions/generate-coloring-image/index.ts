@@ -295,23 +295,39 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error("AI gateway error details:", {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText,
+        category,
+        difficulty: normalizedDifficulty,
+        mode: isChristmasMode ? 'christmas' : isChristianMode ? 'christian' : 'normal'
+      });
+      
       if (response.status === 429) {
-        console.error('Rate limit exceeded');
-        return new Response(JSON.stringify({ error: "Limite de uso excedido. Por favor, tente novamente mais tarde." }), {
+        console.error('Rate limit exceeded - too many requests');
+        return new Response(JSON.stringify({ 
+          error: "Limite de uso excedido. Por favor, tente novamente mais tarde.",
+          code: "RATE_LIMIT"
+        }), {
           status: 429,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
+      
       if (response.status === 402) {
-        console.error('Payment required');
-        return new Response(JSON.stringify({ error: "Créditos insuficientes. Por favor, adicione créditos ao workspace." }), {
+        console.error('Payment required - no credits available');
+        return new Response(JSON.stringify({ 
+          error: "Créditos insuficientes. Por favor, adicione créditos ao workspace.",
+          code: "NO_CREDITS"
+        }), {
           status: 402,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
-      throw new Error(`AI gateway error: ${response.status}`);
+      
+      throw new Error(`AI gateway error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();

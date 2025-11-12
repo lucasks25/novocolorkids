@@ -102,15 +102,25 @@ useEffect(() => {
 
   const useOfflineDrawing = () => {
     const mode = isChristmasMode ? "christmas" : isChristianMode ? "christian" : "normal";
-    const offlineDrawing = getRandomOfflineDrawing(mode, difficulty);
+    const offlineDrawing = getRandomOfflineDrawing(mode, difficulty, selectedCategory);
     
     setGeneratedImage(offlineDrawing.url);
     setCurrentCategory(selectedCategory || offlineDrawing.category);
     setShowColoring(false);
     setIsOfflineMode(true);
     
+    console.log('Usando modo offline:', { 
+      mode, 
+      difficulty, 
+      requestedCategory: selectedCategory,
+      selectedDrawing: offlineDrawing.name,
+      drawingCategory: offlineDrawing.category 
+    });
+    
     toast.info("🎨 Modo Offline: Usando desenho da biblioteca!", {
-      description: "Sem créditos ou conexão? Sem problema! Continue colorindo!"
+      description: selectedCategory && offlineDrawing.category !== selectedCategory
+        ? `Desenho mais próximo encontrado: ${offlineDrawing.name}`
+        : "Sem créditos? Continue colorindo com nossa biblioteca!"
     });
   };
 
