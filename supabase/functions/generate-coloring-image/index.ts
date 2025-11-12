@@ -18,8 +18,10 @@ serve(async (req) => {
     const normalizedDifficulty = difficulty === "hard" ? "medium" : difficulty;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY is not configured");
+    const HUGGING_FACE_TOKEN = Deno.env.get("HUGGING_FACE_ACCESS_TOKEN");
+    
+    if (!LOVABLE_API_KEY && !HUGGING_FACE_TOKEN) {
+      throw new Error("No API keys configured");
     }
 
     // EASY MODE - Christian prompts with variations
@@ -272,72 +274,87 @@ serve(async (req) => {
 
     console.log('Calling AI gateway with prompt:', prompt);
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "google/gemini-2.5-flash-image",
-        messages: [
-          {
-            role: "system",
-            content: "You are a specialist in creating BLACK AND WHITE coloring pages for children. You MUST create images with ONLY pure black lines on pure white background. NEVER use colors, gray tones, or shading. Only solid black outlines. This is CRITICAL - the children need to color the images themselves."
-          },
-          {
-            role: "user",
-            content: prompt + " REMINDER: Create ONLY black and white line art. NO colors, NO gray, NO shading - only pure black lines on white background!"
-          }
-        ],
-        modalities: ["image", "text"]
-      })
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("AI gateway error details:", {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorText,
-        category,
-        difficulty: normalizedDifficulty,
-        mode: isChristmasMode ? 'christmas' : isChristianMode ? 'christian' : 'normal'
-      });
-      
-      if (response.status === 429) {
-        console.error('Rate limit exceeded - too many requests');
-        return new Response(JSON.stringify({ 
-          error: "Limite de uso excedido. Por favor, tente novamente mais tarde.",
-          code: "RATE_LIMIT"
-        }), {
-          status: 429,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      
-      if (response.status === 402) {
-        console.error('Payment required - no credits available');
-        return new Response(JSON.stringify({ 
-          error: "Créditos insuficientes. Por favor, adicione créditos ao workspace.",
-          code: "NO_CREDITS"
-        }), {
-          status: 402,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      
-      throw new Error(`AI gateway error: ${response.status} - ${errorText}`);
-    }
-
-    const data = await response.json();
-    console.log('AI gateway response received');
+    // Try Lovable AI first if available
+    let imageUrl = null;
     
-    const imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
+    if (LOVABLE_API_KEY) {
+      try {
+        console.log('Attempting Lovable AI generation...');
+        const lovableResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.5-flash-image",
+            messages: [
+              {
+                role: "system",
+                content: "You are a specialist in creating BLACK AND WHITE coloring pages for children. You MUST create images with ONLY pure black lines on pure white background. NEVER use colors, gray tones, or shading. Only solid black outlines. This is CRITICAL - the children need to color the images themselves."
+              },
+              {
+                role: "user",
+                content: prompt + " REMINDER: Create ONLY black and white line art. NO colors, NO gray, NO shading - only pure black lines on white background!"
+              }
+            ],
+            modalities: ["image", "text"]
+          })
+        });
+
+        if (lovableResponse.ok) {
+          const data = await lovableResponse.json();
+          imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
+          console.log('Lovable AI: Image generated successfully');
+        } else if (lovableResponse.status === 402 || lovableResponse.status === 429) {
+          console.log('Lovable AI unavailable (402/429), trying Hugging Face...');
+        } else {
+          const errorText = await lovableResponse.text();
+          console.error("Lovable AI error:", lovableResponse.status, errorText);
+        }
+      } catch (error) {
+        console.error('Lovable AI error:', error);
+      }
+    }
+    
+    // Try Hugging Face if Lovable failed or unavailable
+    if (!imageUrl && HUGGING_FACE_TOKEN) {
+      try {
+        console.log('Attempting Hugging Face generation...');
+        const hfResponse = await fetch("https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${HUGGING_FACE_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            inputs: prompt
+          })
+        });
+
+        if (hfResponse.ok) {
+          const imageBlob = await hfResponse.blob();
+          const arrayBuffer = await imageBlob.arrayBuffer();
+          const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+          imageUrl = `data:image/png;base64,${base64}`;
+          console.log('Hugging Face: Image generated successfully');
+        } else {
+          const errorText = await hfResponse.text();
+          console.error("Hugging Face error:", hfResponse.status, errorText);
+        }
+      } catch (error) {
+        console.error('Hugging Face error:', error);
+      }
+    }
     
     if (!imageUrl) {
-      console.error('No image URL in response:', data);
-      throw new Error("Failed to generate image");
+      return new Response(JSON.stringify({ 
+        error: "Não foi possível gerar a imagem. Use o modo offline.",
+        code: "NO_GENERATION"
+      }), {
+        status: 503,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     console.log('Image generated successfully');

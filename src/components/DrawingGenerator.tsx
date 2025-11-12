@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Sparkles, Download, Loader2, Palette, WifiOff } from "lucide-react";
+import { Sparkles, Download, Loader2, Palette } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
@@ -22,7 +22,6 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false, isChristm
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<"easy" | "medium">("easy");
-  const [isOfflineMode, setIsOfflineMode] = useState(false);
 useEffect(() => {
     // Listen for drawing completion to unlock achievement and hide banner
     const handleDrawingComplete = (event: CustomEvent) => {
@@ -56,7 +55,6 @@ useEffect(() => {
 
     setStatusMessage("Gerando desenho...");
     setIsGenerating(true);
-    setIsOfflineMode(false);
     
     try {
       const { data, error } = await supabase.functions.invoke('generate-coloring-image', {
@@ -84,7 +82,6 @@ useEffect(() => {
         setGeneratedImage(data.imageUrl);
         setCurrentCategory(selectedCategory);
         setShowColoring(false);
-        setIsOfflineMode(false);
         toast.success("Desenho gerado com sucesso!");
       } else {
         useOfflineDrawing();
@@ -105,21 +102,6 @@ useEffect(() => {
     setGeneratedImage(offlineDrawing.url);
     setCurrentCategory(selectedCategory || offlineDrawing.category);
     setShowColoring(false);
-    setIsOfflineMode(true);
-    
-    console.log('Usando modo offline:', { 
-      mode, 
-      difficulty, 
-      requestedCategory: selectedCategory,
-      selectedDrawing: offlineDrawing.name,
-      drawingCategory: offlineDrawing.category 
-    });
-    
-    toast.info("🎨 Modo Offline: Usando desenho da biblioteca!", {
-      description: selectedCategory && offlineDrawing.category !== selectedCategory
-        ? `Desenho mais próximo encontrado: ${offlineDrawing.name}`
-        : "Sem créditos? Continue colorindo com nossa biblioteca!"
-    });
   };
 
   const downloadAsPDF = () => {
@@ -228,17 +210,6 @@ useEffect(() => {
 
       {generatedImage && !showColoring && (
         <Card className="p-6 space-y-4">
-          {isOfflineMode && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4 flex items-center gap-3">
-              <WifiOff className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
-              <div className="text-sm">
-                <p className="font-semibold text-blue-900 dark:text-blue-100">Modo Offline Ativo</p>
-                <p className="text-blue-700 dark:text-blue-300">
-                  Este desenho é da biblioteca offline. Adicione créditos para gerar desenhos personalizados!
-                </p>
-              </div>
-            </div>
-          )}
           <img 
             src={generatedImage} 
             alt="Desenho gerado" 
