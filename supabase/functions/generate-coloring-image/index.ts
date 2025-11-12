@@ -18,10 +18,9 @@ serve(async (req) => {
     const normalizedDifficulty = difficulty === "hard" ? "medium" : difficulty;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    const HUGGING_FACE_TOKEN = Deno.env.get("HUGGING_FACE_ACCESS_TOKEN");
     
-    if (!LOVABLE_API_KEY && !HUGGING_FACE_TOKEN) {
-      throw new Error("No API keys configured");
+    if (!LOVABLE_API_KEY) {
+      console.log('LOVABLE_API_KEY not configured, will use offline library');
     }
 
     // EASY MODE - Christian prompts with variations
@@ -306,8 +305,10 @@ serve(async (req) => {
           const data = await lovableResponse.json();
           imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
           console.log('Lovable AI: Image generated successfully');
-        } else if (lovableResponse.status === 402 || lovableResponse.status === 429) {
-          console.log('Lovable AI unavailable (402/429), trying Hugging Face...');
+        } else if (lovableResponse.status === 402) {
+          console.log('Lovable AI: sem créditos disponíveis (402), usando biblioteca offline');
+        } else if (lovableResponse.status === 429) {
+          console.log('Lovable AI: limite de requisições atingido (429), usando biblioteca offline');
         } else {
           const errorText = await lovableResponse.text();
           console.error("Lovable AI error:", lovableResponse.status, errorText);
@@ -317,52 +318,12 @@ serve(async (req) => {
       }
     }
     
-    // Try Hugging Face if Lovable failed or unavailable
-    if (!imageUrl && HUGGING_FACE_TOKEN) {
-      try {
-        console.log('Attempting Hugging Face generation...');
-        
-        // Simplified prompt for Hugging Face (works better with FLUX)
-        const simplePrompt = `Black and white coloring page for children: ${category}. Simple cartoon style, thick outlines, no colors, no shading, white background`;
-        
-        const hfResponse = await fetch("https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${HUGGING_FACE_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            inputs: simplePrompt,
-            parameters: {
-              guidance_scale: 3.5,
-              num_inference_steps: 4,
-              width: 768,
-              height: 768
-            }
-          })
-        });
-
-        if (hfResponse.ok) {
-          const imageBlob = await hfResponse.blob();
-          const arrayBuffer = await imageBlob.arrayBuffer();
-          const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-          imageUrl = `data:image/png;base64,${base64}`;
-          console.log('Hugging Face: Image generated successfully');
-        } else {
-          const errorText = await hfResponse.text();
-          console.error("Hugging Face error:", hfResponse.status, errorText);
-        }
-      } catch (error) {
-        console.error('Hugging Face error:', error);
-      }
-    }
-    
-    // Return offline mode signal if both failed
+    // Return offline mode signal if generation failed or no credits
     if (!imageUrl) {
-      console.log('All generation methods failed, using offline mode');
+      console.log('Lovable AI generation failed or unavailable, using offline library');
       return new Response(JSON.stringify({ 
         useOffline: true,
-        message: "Usando biblioteca offline"
+        message: "Usando biblioteca offline - Adicione créditos Lovable para gerar desenhos ilimitados!"
       }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
