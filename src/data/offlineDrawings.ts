@@ -1,4 +1,4 @@
-// Biblioteca de desenhos offline para quando não houver créditos ou conexão
+// Biblioteca de desenhos offline
 import catImage from "@/assets/offline/cat.png";
 import sunImage from "@/assets/offline/sun.png";
 import bearImage from "@/assets/offline/bear.png";
@@ -27,6 +27,38 @@ import cakeImage from "@/assets/offline/cake-easy.png";
 import angelImage from "@/assets/offline/angel-easy.png";
 import churchImage from "@/assets/offline/church-easy.png";
 import noahsArkImage from "@/assets/offline/noahs-ark-easy.png";
+
+// Novas imagens
+import dog1 from "@/assets/offline/dog-1.png";
+import cat2 from "@/assets/offline/cat-2.png";
+import bunny2 from "@/assets/offline/bunny-2.png";
+import bear2 from "@/assets/offline/bear-2.png";
+import elephantEasy from "@/assets/offline/elephant-easy.png";
+import lionEasy from "@/assets/offline/lion-easy.png";
+import giraffeEasy from "@/assets/offline/giraffe-easy.png";
+import monkeyEasy from "@/assets/offline/monkey-easy.png";
+import dolphinEasy from "@/assets/offline/dolphin-easy.png";
+import penguinEasy from "@/assets/offline/penguin-easy.png";
+import turtleEasy from "@/assets/offline/turtle-easy.png";
+import pigEasy from "@/assets/offline/pig-easy.png";
+import cowEasy from "@/assets/offline/cow-easy.png";
+import horseEasy from "@/assets/offline/horse-easy.png";
+import sheepEasy from "@/assets/offline/sheep-easy.png";
+import chickenEasy from "@/assets/offline/chicken-easy.png";
+import duckEasy from "@/assets/offline/duck-easy.png";
+import treeEasy from "@/assets/offline/tree-easy.png";
+import sunflowerEasy from "@/assets/offline/sunflower-easy.png";
+import roseEasy from "@/assets/offline/rose-easy.png";
+import santa2 from "@/assets/offline/santa-2.png";
+import christmasTree2 from "@/assets/offline/christmas-tree-2.png";
+import snowman2 from "@/assets/offline/snowman-2.png";
+import jesusChildren2 from "@/assets/offline/jesus-children-2.png";
+import prayer2 from "@/assets/offline/prayer-2.png";
+import church2 from "@/assets/offline/church-2.png";
+import rainbow2 from "@/assets/offline/rainbow-2.png";
+import angel2 from "@/assets/offline/angel-2.png";
+import fishEasy from "@/assets/offline/fish-easy.png";
+import whaleEasy from "@/assets/offline/whale-easy.png";
 
 interface OfflineDrawing {
   url: string;
@@ -243,7 +275,45 @@ export const offlineDrawings: OfflineDrawing[] = [
     mode: "christian",
     difficulty: "medium",
     name: "Jesus com Crianças"
-  }
+  },
+  
+  // Animais adicionais - fácil
+  { url: dog1, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Cachorro Feliz 2" },
+  { url: cat2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Gato Brincalhão" },
+  { url: bunny2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Coelho Pulando" },
+  { url: bear2, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Urso Sorridente" },
+  { url: elephantEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Elefante Amigável" },
+  { url: lionEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Leão Feliz" },
+  { url: giraffeEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Girafa Fofa" },
+  { url: monkeyEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Macaco Divertido" },
+  { url: dolphinEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Golfinho Saltando" },
+  { url: penguinEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Pinguim Fofo" },
+  { url: turtleEasy, category: "Animais Fofos", mode: "normal", difficulty: "easy", name: "Tartaruga Sorridente" },
+  { url: pigEasy, category: "Animais da Fazenda", mode: "normal", difficulty: "easy", name: "Porquinho" },
+  { url: cowEasy, category: "Animais da Fazenda", mode: "normal", difficulty: "easy", name: "Vaquinha" },
+  { url: horseEasy, category: "Animais da Fazenda", mode: "normal", difficulty: "easy", name: "Cavalinho" },
+  { url: sheepEasy, category: "Animais da Fazenda", mode: "normal", difficulty: "easy", name: "Ovelhinha" },
+  { url: chickenEasy, category: "Animais da Fazenda", mode: "normal", difficulty: "easy", name: "Galinha" },
+  { url: duckEasy, category: "Animais da Fazenda", mode: "normal", difficulty: "easy", name: "Patinho" },
+  { url: fishEasy, category: "Animais Marinhos", mode: "normal", difficulty: "easy", name: "Peixinho" },
+  { url: whaleEasy, category: "Animais Marinhos", mode: "normal", difficulty: "easy", name: "Baleia Sorridente" },
+  
+  // Natureza adicional
+  { url: treeEasy, category: "Natureza", mode: "normal", difficulty: "easy", name: "Árvore Bonita" },
+  { url: sunflowerEasy, category: "Natureza", mode: "normal", difficulty: "easy", name: "Girassol Feliz" },
+  { url: roseEasy, category: "Natureza", mode: "normal", difficulty: "easy", name: "Rosa Linda" },
+  
+  // Natal adicional
+  { url: santa2, category: "Papai Noel", mode: "christmas", difficulty: "easy", name: "Rosto do Papai Noel" },
+  { url: christmasTree2, category: "Árvore de Natal", mode: "christmas", difficulty: "easy", name: "Árvore Decorada" },
+  { url: snowman2, category: "Boneco de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cachecol" },
+  
+  // Cristãos adicionais
+  { url: jesusChildren2, category: "História Bíblica", mode: "christian", difficulty: "easy", name: "Jesus e as Crianças 2" },
+  { url: prayer2, category: "Oração", mode: "christian", difficulty: "easy", name: "Mãos com Cruz" },
+  { url: church2, category: "Templo e Igreja", mode: "christian", difficulty: "easy", name: "Igreja Bonita" },
+  { url: rainbow2, category: "Símbolos Cristãos", mode: "christian", difficulty: "easy", name: "Arco-íris com Nuvens" },
+  { url: angel2, category: "Personagens da Bíblia", mode: "christian", difficulty: "easy", name: "Anjinho Fofo" }
 ];
 
 export const getRandomOfflineDrawing = (

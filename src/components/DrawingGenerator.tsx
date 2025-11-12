@@ -68,9 +68,7 @@ useEffect(() => {
         }
       });
 
-      // Verifica se é erro de créditos insuficientes (402)
       if (error && (error as any).status === 402) {
-        console.log('Sem créditos disponíveis, usando modo offline');
         useOfflineDrawing();
         return;
       }
