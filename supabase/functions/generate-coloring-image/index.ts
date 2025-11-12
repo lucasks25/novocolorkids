@@ -321,14 +321,24 @@ serve(async (req) => {
     if (!imageUrl && HUGGING_FACE_TOKEN) {
       try {
         console.log('Attempting Hugging Face generation...');
-        const hfResponse = await fetch("https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell", {
+        
+        // Simplified prompt for Hugging Face (works better with FLUX)
+        const simplePrompt = `Black and white coloring page for children: ${category}. Simple cartoon style, thick outlines, no colors, no shading, white background`;
+        
+        const hfResponse = await fetch("https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${HUGGING_FACE_TOKEN}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            inputs: prompt
+            inputs: simplePrompt,
+            parameters: {
+              guidance_scale: 3.5,
+              num_inference_steps: 4,
+              width: 768,
+              height: 768
+            }
           })
         });
 

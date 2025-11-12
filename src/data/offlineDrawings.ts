@@ -60,6 +60,21 @@ import angel2 from "@/assets/offline/angel-2.png";
 import fishEasy from "@/assets/offline/fish-easy.png";
 import whaleEasy from "@/assets/offline/whale-easy.png";
 
+// Novas categorias completas
+import car2 from "@/assets/offline/car-2.png";
+import airplaneEasy from "@/assets/offline/airplane-easy.png";
+import trainEasy from "@/assets/offline/train-easy.png";
+import rocket2 from "@/assets/offline/rocket-2.png";
+import astronautEasy from "@/assets/offline/astronaut-easy.png";
+import planetEasy from "@/assets/offline/planet-easy.png";
+import birthdayCakeEasy from "@/assets/offline/birthday-cake-easy.png";
+import balloonsEasy from "@/assets/offline/balloons-easy.png";
+import giftsEasy from "@/assets/offline/gifts-easy.png";
+import reindeerEasy from "@/assets/offline/reindeer-easy.png";
+import ornamentEasy from "@/assets/offline/ornament-easy.png";
+import bible2 from "@/assets/offline/bible-2.png";
+import sharingEasy from "@/assets/offline/sharing-easy.png";
+
 interface OfflineDrawing {
   url: string;
   category: string;
@@ -202,14 +217,14 @@ export const offlineDrawings: OfflineDrawing[] = [
   },
   {
     url: snowmanImage,
-    category: "Enfeites Natalinos",
+    category: "Bonecos de Neve",
     mode: "christmas",
     difficulty: "easy",
     name: "Boneco de Neve"
   },
   {
     url: santaImage,
-    category: "Personagens Natalinos",
+    category: "Papai Noel",
     mode: "christmas",
     difficulty: "easy",
     name: "Papai Noel"
@@ -218,7 +233,7 @@ export const offlineDrawings: OfflineDrawing[] = [
   // Desenhos de Natal - médio
   {
     url: nativityImage,
-    category: "Presépio",
+    category: "Enfeites Natalinos",
     mode: "christmas",
     difficulty: "medium",
     name: "Presépio Completo"
@@ -271,7 +286,7 @@ export const offlineDrawings: OfflineDrawing[] = [
   // Desenhos cristãos - médio
   {
     url: jesusChildrenImage,
-    category: "História Bíblica",
+    category: "Histórias Bíblicas",
     mode: "christian",
     difficulty: "medium",
     name: "Jesus com Crianças"
@@ -306,14 +321,51 @@ export const offlineDrawings: OfflineDrawing[] = [
   // Natal adicional
   { url: santa2, category: "Papai Noel", mode: "christmas", difficulty: "easy", name: "Rosto do Papai Noel" },
   { url: christmasTree2, category: "Árvore de Natal", mode: "christmas", difficulty: "easy", name: "Árvore Decorada" },
-  { url: snowman2, category: "Boneco de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cachecol" },
+  { url: snowman2, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cachecol" },
   
   // Cristãos adicionais
-  { url: jesusChildren2, category: "História Bíblica", mode: "christian", difficulty: "easy", name: "Jesus e as Crianças 2" },
+  { url: jesusChildren2, category: "Histórias Bíblicas", mode: "christian", difficulty: "easy", name: "Jesus e as Crianças 2" },
   { url: prayer2, category: "Oração", mode: "christian", difficulty: "easy", name: "Mãos com Cruz" },
   { url: church2, category: "Templo e Igreja", mode: "christian", difficulty: "easy", name: "Igreja Bonita" },
   { url: rainbow2, category: "Símbolos Cristãos", mode: "christian", difficulty: "easy", name: "Arco-íris com Nuvens" },
-  { url: angel2, category: "Personagens da Bíblia", mode: "christian", difficulty: "easy", name: "Anjinho Fofo" }
+  { url: angel2, category: "Personagens da Bíblia", mode: "christian", difficulty: "easy", name: "Anjinho Fofo" },
+  { url: bible2, category: "Versículos", mode: "christian", difficulty: "easy", name: "Bíblia Aberta" },
+  { url: sharingEasy, category: "Valores Cristãos", mode: "christian", difficulty: "easy", name: "Crianças Compartilhando" },
+  
+  // Transportes completo
+  { url: carImage, category: "Transportes", mode: "normal", difficulty: "easy", name: "Carro Simples" },
+  { url: car2, category: "Transportes", mode: "normal", difficulty: "easy", name: "Carro com Rodas Grandes" },
+  { url: airplaneEasy, category: "Transportes", mode: "normal", difficulty: "easy", name: "Avião Sorridente" },
+  { url: trainEasy, category: "Transportes", mode: "normal", difficulty: "easy", name: "Trem Feliz" },
+  
+  // Espaço completo
+  { url: rocketImage, category: "Espaço", mode: "normal", difficulty: "easy", name: "Foguete Simples" },
+  { url: rocket2, category: "Espaço", mode: "normal", difficulty: "easy", name: "Foguete com Estrelas" },
+  { url: astronautEasy, category: "Espaço", mode: "normal", difficulty: "easy", name: "Astronauta Feliz" },
+  { url: planetEasy, category: "Espaço", mode: "normal", difficulty: "easy", name: "Planeta Terra" },
+  
+  // Profissões completo
+  { url: doctorImage, category: "Profissões", mode: "normal", difficulty: "easy", name: "Doutor Feliz" },
+  { url: firefighterImage, category: "Profissões", mode: "normal", difficulty: "easy", name: "Bombeiro" },
+  { url: teacherImage, category: "Profissões", mode: "normal", difficulty: "medium", name: "Professor" },
+  
+  // Festas completo
+  { url: cakeImage, category: "Festas", mode: "normal", difficulty: "easy", name: "Bolo Simples" },
+  { url: birthdayCakeEasy, category: "Festas", mode: "normal", difficulty: "easy", name: "Bolo de Aniversário" },
+  { url: balloonsEasy, category: "Festas", mode: "normal", difficulty: "easy", name: "Balões Coloridos" },
+  
+  // Natal - Presentes
+  { url: giftsEasy, category: "Presentes", mode: "christmas", difficulty: "easy", name: "Pilha de Presentes" },
+  
+  // Natal - Renas
+  { url: reindeerEasy, category: "Renas", mode: "christmas", difficulty: "easy", name: "Rena Amigável" },
+  
+  // Natal - Enfeites
+  { url: ornamentEasy, category: "Enfeites Natalinos", mode: "christmas", difficulty: "easy", name: "Bola de Natal" },
+  
+  // Natal - Bonecos de Neve (categoria exata)
+  { url: snowmanImage, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco de Neve" },
+  { url: snowman2, category: "Bonecos de Neve", mode: "christmas", difficulty: "easy", name: "Boneco com Cachecol" }
 ];
 
 export const getRandomOfflineDrawing = (
@@ -321,35 +373,48 @@ export const getRandomOfflineDrawing = (
   difficulty: "easy" | "medium",
   category?: string
 ): OfflineDrawing => {
-  // Primeiro tenta filtrar por modo, dificuldade E categoria
-  let filtered = offlineDrawings.filter(
-    d => d.mode === mode && d.difficulty === difficulty && 
-    (!category || d.category === category)
+  // PRIORIDADE 1: Match EXATO de modo + dificuldade + categoria
+  if (category) {
+    const exactMatch = offlineDrawings.filter(
+      d => d.mode === mode && d.difficulty === difficulty && d.category === category
+    );
+    
+    if (exactMatch.length > 0) {
+      const randomIndex = Math.floor(Math.random() * exactMatch.length);
+      const selected = exactMatch[randomIndex];
+      console.log('✅ MATCH EXATO:', selected.name, '| Categoria:', selected.category);
+      return selected;
+    }
+    
+    console.warn('⚠️ NENHUM DESENHO para categoria:', category, '| Modo:', mode, '| Dificuldade:', difficulty);
+  }
+  
+  // PRIORIDADE 2: Match modo + dificuldade (qualquer categoria)
+  const modeAndDifficultyMatch = offlineDrawings.filter(
+    d => d.mode === mode && d.difficulty === difficulty
   );
   
-  // Se não encontrou com a categoria exata, tenta pelo menos o modo e dificuldade
-  if (filtered.length === 0 && category) {
-    console.log('Nenhum desenho offline encontrado para categoria:', category, 'Tentando sem categoria específica');
-    filtered = offlineDrawings.filter(
-      d => d.mode === mode && d.difficulty === difficulty
-    );
+  if (modeAndDifficultyMatch.length > 0) {
+    const randomIndex = Math.floor(Math.random() * modeAndDifficultyMatch.length);
+    const selected = modeAndDifficultyMatch[randomIndex];
+    console.warn('⚠️ FALLBACK (sem categoria exata):', selected.name, '| Categoria:', selected.category);
+    return selected;
   }
   
-  // Se ainda não houver desenhos para a dificuldade específica, tenta qualquer dificuldade do modo
-  if (filtered.length === 0) {
-    console.log('Nenhum desenho offline encontrado para dificuldade:', difficulty, 'Tentando qualquer dificuldade');
-    filtered = offlineDrawings.filter(d => d.mode === mode);
+  // PRIORIDADE 3: Match apenas modo (qualquer dificuldade)
+  const modeMatch = offlineDrawings.filter(d => d.mode === mode);
+  
+  if (modeMatch.length > 0) {
+    const randomIndex = Math.floor(Math.random() * modeMatch.length);
+    const selected = modeMatch[randomIndex];
+    console.warn('⚠️ FALLBACK (dificuldade diferente):', selected.name);
+    return selected;
   }
   
-  // Se ainda não houver desenhos para o modo, usa desenhos normais
-  if (filtered.length === 0) {
-    console.log('Nenhum desenho offline encontrado para modo:', mode, 'Usando modo normal');
-    filtered = offlineDrawings.filter(d => d.mode === "normal");
-  }
-  
-  // Retorna um desenho aleatório
-  const randomIndex = Math.floor(Math.random() * filtered.length);
-  const selected = filtered[randomIndex];
-  console.log('Desenho offline selecionado:', selected.name, 'Categoria:', selected.category);
+  // ÚLTIMO RECURSO: Qualquer desenho normal
+  const normalDrawings = offlineDrawings.filter(d => d.mode === "normal");
+  const randomIndex = Math.floor(Math.random() * normalDrawings.length);
+  const selected = normalDrawings[randomIndex];
+  console.error('❌ ÚLTIMO RECURSO:', selected.name);
   return selected;
 };
