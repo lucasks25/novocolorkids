@@ -73,7 +73,12 @@ useEffect(() => {
 
       if (error) {
         console.error('Error generating drawing:', error);
-        // Tenta usar modo offline em caso de erro de conexão
+        useOfflineDrawing();
+        return;
+      }
+
+      // Check if response indicates to use offline mode
+      if (data?.useOffline) {
         useOfflineDrawing();
         return;
       }

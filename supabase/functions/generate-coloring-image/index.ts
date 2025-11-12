@@ -321,7 +321,7 @@ serve(async (req) => {
     if (!imageUrl && HUGGING_FACE_TOKEN) {
       try {
         console.log('Attempting Hugging Face generation...');
-        const hfResponse = await fetch("https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell", {
+        const hfResponse = await fetch("https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${HUGGING_FACE_TOKEN}`,
@@ -347,12 +347,14 @@ serve(async (req) => {
       }
     }
     
+    // Return offline mode signal if both failed
     if (!imageUrl) {
+      console.log('All generation methods failed, using offline mode');
       return new Response(JSON.stringify({ 
-        error: "Não foi possível gerar a imagem. Use o modo offline.",
-        code: "NO_GENERATION"
+        useOffline: true,
+        message: "Usando biblioteca offline"
       }), {
-        status: 503,
+        status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
