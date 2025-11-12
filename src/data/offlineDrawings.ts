@@ -5,6 +5,22 @@ import bearImage from "@/assets/offline/bear.png";
 import christmasTreeImage from "@/assets/offline/christmas-tree.png";
 import crossImage from "@/assets/offline/cross.png";
 import houseImage from "@/assets/offline/house.png";
+import dogImage from "@/assets/offline/dog.png";
+import bunnyImage from "@/assets/offline/bunny.png";
+import butterflyImage from "@/assets/offline/butterfly-easy.png";
+import foxImage from "@/assets/offline/fox-medium.png";
+import flowerImage from "@/assets/offline/flower-easy.png";
+import rainbowImage from "@/assets/offline/rainbow-easy.png";
+import gardenImage from "@/assets/offline/garden-medium.png";
+import doctorImage from "@/assets/offline/doctor-easy.png";
+import firefighterImage from "@/assets/offline/firefighter-easy.png";
+import teacherImage from "@/assets/offline/teacher-medium.png";
+import snowmanImage from "@/assets/offline/snowman-easy.png";
+import santaImage from "@/assets/offline/santa-easy.png";
+import nativityImage from "@/assets/offline/nativity-medium.png";
+import bibleImage from "@/assets/offline/bible-easy.png";
+import prayerImage from "@/assets/offline/prayer-easy.png";
+import jesusChildrenImage from "@/assets/offline/jesus-children-medium.png";
 
 interface OfflineDrawing {
   url: string;
@@ -24,11 +40,18 @@ export const offlineDrawings: OfflineDrawing[] = [
     name: "Gatinho Fofo"
   },
   {
-    url: sunImage,
-    category: "Natureza",
+    url: dogImage,
+    category: "Animais Fofos",
     mode: "normal",
     difficulty: "easy",
-    name: "Sol Sorridente"
+    name: "Cachorrinho Feliz"
+  },
+  {
+    url: bunnyImage,
+    category: "Animais Fofos",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Coelhinho com Cenoura"
   },
   {
     url: bearImage,
@@ -38,11 +61,76 @@ export const offlineDrawings: OfflineDrawing[] = [
     name: "Ursinho com Coração"
   },
   {
+    url: butterflyImage,
+    category: "Animais Fofos",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Borboleta Colorida"
+  },
+  {
+    url: sunImage,
+    category: "Natureza",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Sol Sorridente"
+  },
+  {
+    url: flowerImage,
+    category: "Natureza",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Flor Feliz"
+  },
+  {
+    url: rainbowImage,
+    category: "Natureza",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Arco-Íris"
+  },
+  {
     url: houseImage,
     category: "Objetos",
     mode: "normal",
     difficulty: "easy",
     name: "Casinha Feliz"
+  },
+  {
+    url: doctorImage,
+    category: "Profissões",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Médico Amigo"
+  },
+  {
+    url: firefighterImage,
+    category: "Profissões",
+    mode: "normal",
+    difficulty: "easy",
+    name: "Bombeiro Corajoso"
+  },
+  
+  // Desenhos normais - médio
+  {
+    url: foxImage,
+    category: "Animais Fofos",
+    mode: "normal",
+    difficulty: "medium",
+    name: "Raposa na Floresta"
+  },
+  {
+    url: gardenImage,
+    category: "Natureza",
+    mode: "normal",
+    difficulty: "medium",
+    name: "Jardim Encantado"
+  },
+  {
+    url: teacherImage,
+    category: "Profissões",
+    mode: "normal",
+    difficulty: "medium",
+    name: "Professora na Sala"
   },
   
   // Desenhos de Natal - fácil
@@ -53,6 +141,29 @@ export const offlineDrawings: OfflineDrawing[] = [
     difficulty: "easy",
     name: "Árvore de Natal Decorada"
   },
+  {
+    url: snowmanImage,
+    category: "Enfeites Natalinos",
+    mode: "christmas",
+    difficulty: "easy",
+    name: "Boneco de Neve"
+  },
+  {
+    url: santaImage,
+    category: "Personagens Natalinos",
+    mode: "christmas",
+    difficulty: "easy",
+    name: "Papai Noel"
+  },
+  
+  // Desenhos de Natal - médio
+  {
+    url: nativityImage,
+    category: "Presépio",
+    mode: "christmas",
+    difficulty: "medium",
+    name: "Presépio Completo"
+  },
   
   // Desenhos cristãos - fácil
   {
@@ -61,6 +172,29 @@ export const offlineDrawings: OfflineDrawing[] = [
     mode: "christian",
     difficulty: "easy",
     name: "Cruz com Flores"
+  },
+  {
+    url: bibleImage,
+    category: "Símbolos Cristãos",
+    mode: "christian",
+    difficulty: "easy",
+    name: "Bíblia Sagrada"
+  },
+  {
+    url: prayerImage,
+    category: "Oração",
+    mode: "christian",
+    difficulty: "easy",
+    name: "Mãos em Oração"
+  },
+  
+  // Desenhos cristãos - médio
+  {
+    url: jesusChildrenImage,
+    category: "História Bíblica",
+    mode: "christian",
+    difficulty: "medium",
+    name: "Jesus com Crianças"
   }
 ];
 
