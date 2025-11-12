@@ -67,19 +67,26 @@ useEffect(() => {
       });
 
       if (error && (error as any).status === 402) {
-        useOfflineDrawing();
+        toast.error("Sem créditos Lovable! Adicione créditos para gerar desenhos ilimitados. 🎨", {
+          duration: 5000
+        });
+        setStatusMessage(null);
         return;
       }
 
       if (error) {
         console.error('Error generating drawing:', error);
-        useOfflineDrawing();
+        toast.error("Erro ao gerar desenho. Tente novamente!");
+        setStatusMessage(null);
         return;
       }
 
-      // Check if response indicates to use offline mode
+      // Check if response indicates to use offline mode (no credits)
       if (data?.useOffline) {
-        useOfflineDrawing();
+        toast.error("Sem créditos Lovable! Adicione créditos para gerar desenhos ilimitados. 🎨", {
+          duration: 5000
+        });
+        setStatusMessage(null);
         return;
       }
 
@@ -87,14 +94,15 @@ useEffect(() => {
         setGeneratedImage(data.imageUrl);
         setCurrentCategory(selectedCategory);
         setShowColoring(false);
-        toast.success("Desenho gerado com sucesso!");
+        toast.success("Desenho gerado com sucesso! 🎉");
       } else {
-        useOfflineDrawing();
+        toast.error("Erro ao gerar desenho. Tente novamente!");
+        setStatusMessage(null);
       }
     } catch (error) {
       console.error('Error:', error);
-      // Em caso de erro de conexão, usa modo offline
-      useOfflineDrawing();
+      toast.error("Erro de conexão. Verifique sua internet e tente novamente!");
+      setStatusMessage(null);
     } finally {
       setIsGenerating(false);
     }
