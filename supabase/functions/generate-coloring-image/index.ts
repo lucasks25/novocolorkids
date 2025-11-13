@@ -38,34 +38,84 @@ serve(async (req) => {
         "BLACK AND WHITE COLORING PAGE ONLY! Young shepherd boy David with one cute sheep beside him, holding a simple staff. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Big round head, simple body, happy sheep. NO background details. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Baby Moses in a simple basket floating on water with 2-3 simple reeds around. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Round baby face, simple basket weave pattern. NO shading. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Daniel standing between 2 cute friendly lions with big manes. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple cartoon faces, round bodies. NO background. Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Jonah and a big friendly whale with a huge smile. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple shapes, big eyes. NO water details. Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Jonah and a big friendly whale with a huge smile. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple shapes, big eyes. NO water details. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Adam and Eve with apple tree, simple garden scene. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Happy faces, basic tree shape. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Joseph with colorful coat (outline only), smiling. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple robe pattern. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Zacchaeus climbing simple tree to see Jesus. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Round tree, happy character. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Boy with 5 loaves and 2 fish, simple basket. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Basic food shapes. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! The Good Samaritan helping someone, simple scene. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Two characters, caring pose. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Tower of Babel with simple building blocks. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Stacked rectangles. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Samson with long hair pushing simple pillars. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Strong character. Ages 3-7."
       ],
       "Personagens da Bíblia": [
         "BLACK AND WHITE COLORING PAGE ONLY! Jesus with kind smile and open arms welcoming children. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple robe, gentle face. NO background. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Mary holding baby Jesus with loving expression. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple clothing, peaceful faces. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Moses holding two simple tablets with basic markings. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple beard, basic robe. Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Angel with big wings and happy smile. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple feather pattern, round face. Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Angel with big wings and happy smile. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple feather pattern, round face. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Noah waving from ark window. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Friendly face, simple boat. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Abraham looking at stars, pointing up. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple robe, few stars. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Ruth gathering wheat in field. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple dress, wheat stalks. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Peter with fishing net and one fish. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple fisherman look. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Paul writing letter with quill. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple scroll, basic pen. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Elijah with ravens bringing food. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple birds, bread. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Esther with crown, kind expression. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Simple tiara, dress. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Joshua with simple trumpet. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (8-10px). Basic horn shape. Ages 3-7."
       ],
       "Símbolos Cristãos": [
         "BLACK AND WHITE COLORING PAGE ONLY! Large simple cross with round ends taking up most of page. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). NO decorations. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Two large praying hands in center of page. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Simple fingers, minimal details. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Big dove flying with simple wings spread. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Basic feather outline. Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Large fish symbol (ichthys) taking up most of page. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Simple curved shape. Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Large fish symbol (ichthys) taking up most of page. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Simple curved shape. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Bible book with simple cross on cover. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Basic rectangle. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Heart with cross inside, large and centered. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Simple shapes. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Simple chalice cup with round base. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Basic cup shape. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Lamb with simple wool texture, sitting. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Cute face. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Crown of thorns in circle shape. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Simple points. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Anchor with rope, simple nautical symbol. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Basic anchor. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Three crosses on hill, simple scene. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Basic crosses. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Star of David, large centered shape. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). SUPER THICK outlines (10-12px). Two triangles. Ages 3-7."
       ],
       "Versículos": [
         "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'João 3:16 - Deus amou o mundo' in bubble letters. BELOW: 3 large hearts. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Salmos 23 - O Senhor é meu pastor' in bubble letters. BELOW: simple shepherd staff and one sheep. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Provérbios 3:5 - Confie no Senhor' in bubble letters. BELOW: large star and 2 clouds. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Provérbios 3:5 - Confie no Senhor' in bubble letters. BELOW: large star and 2 clouds. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Filipenses 4:13' in bubble letters. BELOW: strong child with arms up. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Jesus me ama' in bubble letters. BELOW: big heart. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Mateus 19:14' in bubble letters. BELOW: Jesus with child. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Ame ao próximo' in bubble letters. BELOW: two children holding hands. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Deus é amor' in bubble letters. BELOW: three hearts. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Josué 1:9' in bubble letters. BELOW: brave child with shield. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Salmos 100:5' in bubble letters. BELOW: happy child praising. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Provérbios 22:6' in bubble letters. BELOW: parent and child. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! TOP: 'Efésios 6:1' in bubble letters. BELOW: obedient child. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
       ],
       "Templo e Igreja": [
         "BLACK AND WHITE COLORING PAGE ONLY! Simple church building: rectangle base, triangle roof, large cross on top, 3 big round windows. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Small chapel with pointed roof, one big door, cross above door, 2 windows. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Church with bell tower, large cross, simple door, 4 windows. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Church with bell tower, large cross, simple door, 4 windows. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Modern church with flat roof, big cross, glass door. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Church with steeple, bell visible, simple windows. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Small country church with fence, one tree. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Church entrance with two doors, cross above. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Church with round window, cross, simple path. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Chapel with arched door, small bell tower. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Simple altar inside church, cross on wall. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Church with people entering, welcoming scene. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Church building with clouds, sun, simple landscape. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). EXTREMELY THICK outlines (10px). Ages 3-7."
       ],
       "Valores Cristãos": [
         "BLACK AND WHITE COLORING PAGE ONLY! Two children sharing a toy, both smiling with big eyes. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Simple faces. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! One child helping another child stand up. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Happy expressions. Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Two children hugging with big smiles. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Round heads. Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Two children hugging with big smiles. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Round heads. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Child saying sorry to another child. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Kind faces. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Children holding hands in circle. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Unity scene. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Child giving flower to friend. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Loving gesture. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Two children praying together. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Peaceful pose. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Child reading Bible to friend. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Sharing faith. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Children singing together happily. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Joyful scene. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Child comforting sad friend. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Compassion. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Children cleaning up together. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Cooperation. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Child saying thank you with smile. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Gratitude. Ages 3-7."
       ]
     };
 
@@ -114,37 +164,84 @@ serve(async (req) => {
         "BLACK AND WHITE COLORING PAGE ONLY! Happy kitten with big eyes, whiskers, playful pose, little paws. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Bunny rabbit with long ears, cotton tail, sitting position, cute face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Baby panda eating bamboo, round body, sitting, big eyes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Little bear cub with round ears, sitting, friendly smile, simple body. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Little bear cub with round ears, sitting, friendly smile, simple body. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Cute baby elephant with big ears, small trunk, standing. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Friendly lion cub with round mane, sitting, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Happy dolphin jumping, curved body, big smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Cute penguin standing, flippers out, round body. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Baby monkey hanging, long tail, playful face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Friendly giraffe with spots, long neck, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Cute turtle with shell pattern, happy face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). NO shading, NO colors. Ages 3-7."
       ],
       "Natureza": [
         "BLACK AND WHITE COLORING PAGE ONLY! Big smiling sun with 8 rays, 2 large flowers with round petals, simple grass. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Large tree with round cloud-top, simple trunk, 3 butterflies flying around. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Rainbow with 5 simple arcs, 2 clouds at ends, happy sun peeking. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO patterns, NO colors. Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Big happy daisy with round center, 8 petals, 2 leaves, simple stem. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Big happy daisy with round center, 8 petals, 2 leaves, simple stem. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Cute smiling cloud with raindrops, simple shapes. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Big sunflower with round center, happy face. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Simple mountain with sun behind, one cloud. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Garden with 3 different flowers, butterfly. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Big leaf with simple veins, ladybug on it. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Moon and stars, simple night sky scene. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Apple tree with 3 apples, simple branches. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Simple cactus with flower on top, desert scene. CRITICAL: Pure black lines (#000000) on white (#FFFFFF). VERY THICK outlines (8-10px). NO textures, NO colors. Ages 3-7."
       ],
       "Transportes": [
         "BLACK AND WHITE COLORING PAGE ONLY! Cute car with big round wheels, smiling face (2 round headlights, bumper smile), simple body. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Happy train with 2 cars, round wheels, simple windows, smiling face on front. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Friendly airplane with wings, 3 windows, propeller, simple body shape. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Cute sailboat with one big sail, simple hull, 2 waves, smiling face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Cute sailboat with one big sail, simple hull, 2 waves, smiling face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Happy helicopter with rotating blade, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! School bus with windows, big wheels, yellow outline. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Fire truck with ladder, simple wheels, siren. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Bicycle with two wheels, simple seat, handlebars. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Hot air balloon floating, basket below, clouds. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Police car with light on top, wheels, windows. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Simple submarine underwater, periscope up. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Tractor with big wheels, simple cabin. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). SUPER THICK lines (10px). Ages 3-7."
       ],
       "Espaço": [
         "BLACK AND WHITE COLORING PAGE ONLY! Rocket ship with triangle top, rectangle body, 3 windows, simple fins, 8 stars around. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Big smiling moon (crescent), 10 simple stars (5-point), 2 clouds. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Happy sun with face, 2 planets (one with rings), 8 stars. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Cute astronaut with round helmet, simple suit, waving, 6 stars around. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Cute astronaut with round helmet, simple suit, waving, 6 stars around. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Flying saucer UFO with dome, simple lights. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Planet Earth with continents, smiling face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Saturn with rings, stars around it. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Astronaut floating in space, tethered. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Space station with solar panels, simple. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Alien with big eyes, friendly smile, antenna. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Comet with tail, stars trailing. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Telescope pointing at stars and moon. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
       ],
       "Profissões": [
         "BLACK AND WHITE COLORING PAGE ONLY! Cute doctor with stethoscope, big smile, simple coat, medical bag. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Happy firefighter with helmet, simple uniform, hose, big smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Friendly teacher with one book, glasses, simple clothes, pointing. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Cheerful chef with tall hat, apron, spoon, big smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Cheerful chef with tall hat, apron, spoon, big smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Police officer with badge, hat, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Farmer with straw hat, holding vegetable. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Nurse with cap, kind smile, clipboard. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Construction worker with hard hat, tools. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Pilot with cap, wings badge, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Veterinarian with pet dog, stethoscope. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Mail carrier with bag, letter in hand. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Astronaut in spacesuit, helmet, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
       ],
       "Festas": [
         "BLACK AND WHITE COLORING PAGE ONLY! Big birthday cake with 2 layers, 5 candles, simple frosting waves. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! 6 round balloons with strings, floating up, simple shapes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! 3 gift boxes with big bows on top, simple ribbons, different sizes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Party hat with dots pattern, 3 balloons, confetti (simple shapes). CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Party hat with dots pattern, 3 balloons, confetti (simple shapes). CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Birthday cupcake with candle, frosting swirl. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Piñata shaped like star, rope hanging. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Party table with cake and presents. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Ice cream cone with sprinkles, big scoop. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Happy birthday banner with letters. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Party horn and streamers, festive. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Crown for birthday kid, simple jewels. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Stack of pancakes with candles on top. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
       ]
     };
 
@@ -194,33 +291,86 @@ serve(async (req) => {
       "Papai Noel": [
         "BLACK AND WHITE COLORING PAGE ONLY! Santa face with big beard, happy smile, simple hat with pom-pom. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Santa waving with one hand, simple belt, boots, big smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Santa head with glasses, beard, hat, jolly expression. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa head with glasses, beard, hat, jolly expression. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa with big gift sack, simple outfit. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa sitting in chair, welcoming. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa with candy cane, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa portrait with list, checking it. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa ringing bell, festive. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa with milk and cookies. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa pointing at you, welcoming smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa with reindeer food, carrots. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Baby Santa, cute and small. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
       ],
       "Árvore de Natal": [
         "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree triangle shape with star on top, 5 round ornaments, simple trunk. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Decorated tree with candy canes, 4 balls, simple star, basic trunk, 2 presents at base. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Simple pine tree with garland, 6 ornaments, big star, presents underneath. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with child decorating it, ornaments, simple star. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with child decorating it, ornaments, simple star. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Small table-top Christmas tree with bow. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with lights (circles), simple. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Tree with angel on top, ornaments below. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Outdoor Christmas tree with snow. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Tree with stockings hung nearby. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Family around Christmas tree. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas tree with wrapped presents all around. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Simple Christmas tree outline with few decorations. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
       ],
       "Presentes": [
         "BLACK AND WHITE COLORING PAGE ONLY! 3 wrapped gift boxes with big bows, different sizes, simple ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Large present with decorative bow, simple pattern on wrapping. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Stack of 4 presents, various sizes, bows and ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Stack of 4 presents, various sizes, bows and ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Single big gift with huge bow on top. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Presents under Christmas tree. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Gift being unwrapped by child hands. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Pile of wrapped presents, festive. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Present with tag saying 'Para você'. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Two presents with different patterns. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Surprise present popping open. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Santa's bag full of presents. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Presents in sleigh, simple scene. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
       ],
       "Renas": [
         "BLACK AND WHITE COLORING PAGE ONLY! Cute reindeer face with big antlers, round nose, happy smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with red nose (Rudolph), simple body, antlers, friendly face. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Two reindeer together, simple bodies, antlers, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Two reindeer together, simple bodies, antlers, smiling. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer jumping, playful pose. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Baby reindeer with small antlers. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer wearing Santa hat. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with Christmas bell collar. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer eating carrot. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer in snow, winter scene. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with scarf around neck. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer with jingle bells. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Reindeer family group, three together. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
       ],
       "Bonecos de Neve": [
         "BLACK AND WHITE COLORING PAGE ONLY! Snowman with 3 circles, top hat, carrot nose, stick arms, coal smile. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Happy snowman with scarf, simple hat, broom, button eyes. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Snowman family (2 snowmen), hats, scarves, smiling faces. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman family (2 snowmen), hats, scarves, smiling faces. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman with earmuffs, cute style. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Melting snowman, funny expression. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman holding present. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman with bird on arm. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman wearing boots. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Dancing snowman, arms up. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman with Christmas lights around. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman building smaller snowman. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowman with carrot, button, stick details. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). EXTREMELY THICK lines (8-10px). Ages 3-7."
       ],
       "Enfeites Natalinos": [
         "BLACK AND WHITE COLORING PAGE ONLY! 4 Christmas ornament balls with simple patterns, hanging ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
         "BLACK AND WHITE COLORING PAGE ONLY! Candy cane with stripes, bell with bow, simple star. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
-        "BLACK AND WHITE COLORING PAGE ONLY! Christmas wreath with bow, 3 ornaments, simple holly leaves. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas wreath with bow, 3 ornaments, simple holly leaves. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Big Christmas stocking with patterns. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas bells with ribbons. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Gingerbread man, simple design. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas candle with holly. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Poinsettia flower, simple petals. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas star ornament. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Mistletoe with bow. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Christmas garland with bows. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7.",
+        "BLACK AND WHITE COLORING PAGE ONLY! Snowflake ornament, detailed pattern. CRITICAL: Pure black outlines (#000000) on white (#FFFFFF). VERY THICK lines (8-10px). Ages 3-7."
       ]
     };
 
