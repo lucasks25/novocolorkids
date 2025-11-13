@@ -21,7 +21,7 @@ const DrawingGenerator = ({ selectedCategory, isChristianMode = false, isChristm
   const [showColoring, setShowColoring] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const [difficulty, setDifficulty] = useState<"easy" | "medium">("easy");
+  const difficulty = "easy"; // Fixed to easy level
 useEffect(() => {
     // Listen for drawing completion to unlock achievement and hide banner
     const handleDrawingComplete = (event: CustomEvent) => {
@@ -150,34 +150,6 @@ useEffect(() => {
       {/* Banner persistente */}
       {statusMessage && <PersistentBanner message={statusMessage} position="top" />}
       
-      {/* Seletor de Nível de Dificuldade */}
-      <Card className="p-4">
-        <div className="flex flex-col gap-3">
-          <h3 className="text-center font-bold text-lg">Nível de Dificuldade</h3>
-          <div className="flex gap-2 justify-center">
-            <Button
-              variant={difficulty === "easy" ? "default" : "outline"}
-              onClick={() => setDifficulty("easy")}
-              className="flex-1 max-w-[200px]"
-            >
-              😊 Fácil
-            </Button>
-            <Button
-              variant={difficulty === "medium" ? "default" : "outline"}
-              onClick={() => setDifficulty("medium")}
-              className="flex-1 max-w-[200px]"
-            >
-              🎨 Médio
-            </Button>
-          </div>
-          <p className="text-center text-sm text-muted-foreground">
-            {difficulty === "easy" 
-              ? "Desenhos simples com linhas grossas - perfeito para começar!" 
-              : "Desenhos com um pouquinho mais de detalhes, mas ainda fáceis!"
-            }
-          </p>
-        </div>
-      </Card>
       
       <div className="text-center">
         <Button

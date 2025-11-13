@@ -11,11 +11,19 @@ serve(async (req) => {
   }
 
   try {
-    const { category, isChristianMode, isChristmasMode, difficulty = "easy" } = await req.json();
-    console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode, 'Christmas mode:', isChristmasMode, 'Difficulty:', difficulty);
+    const { category, isChristianMode, isChristmasMode } = await req.json();
+    console.log('Generating coloring image for category:', category, 'Christian mode:', isChristianMode, 'Christmas mode:', isChristmasMode);
     
-    // Normalize difficulty to easy or medium only
-    const normalizedDifficulty = difficulty === "hard" ? "medium" : difficulty;
+    // Add variety modifiers to randomize prompts
+    const perspectives = ["front view", "side view", "three-quarter view", "playful angle"];
+    const actions = ["sitting", "standing", "playing", "smiling", "waving", "jumping"];
+    const settings = ["on grass", "with clouds", "with flowers", "with stars", "in simple scene"];
+    const expressions = ["happy face", "joyful expression", "friendly smile", "cheerful look"];
+    
+    const randomPerspective = perspectives[Math.floor(Math.random() * perspectives.length)];
+    const randomAction = actions[Math.floor(Math.random() * actions.length)];
+    const randomSetting = settings[Math.floor(Math.random() * settings.length)];
+    const randomExpression = expressions[Math.floor(Math.random() * expressions.length)];
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
@@ -251,14 +259,14 @@ serve(async (req) => {
       ]
     };
 
-    // Select the right prompt set based on difficulty and mode
+    // Select the right prompt set based on mode (fixed to easy difficulty)
     let prompts: Record<string, string[]>;
     if (isChristmasMode) {
-      prompts = normalizedDifficulty === "medium" ? christmasPromptsMedium : christmasPromptsEasy;
+      prompts = christmasPromptsEasy;
     } else if (isChristianMode) {
-      prompts = normalizedDifficulty === "medium" ? christianPromptsMedium : christianPromptsEasy;
+      prompts = christianPromptsEasy;
     } else {
-      prompts = normalizedDifficulty === "medium" ? regularPromptsMedium : regularPromptsEasy;
+      prompts = regularPromptsEasy;
     }
 
     // Get array of prompts for the category or use defaults
@@ -266,10 +274,13 @@ serve(async (req) => {
       ? christmasPromptsEasy["Árvore de Natal"] 
       : (isChristianMode ? christianPromptsEasy["Símbolos Cristãos"] : regularPromptsEasy["Animais Fofos"]));
     
-    // Select a random prompt from the array
-    const prompt = Array.isArray(categoryPrompts) 
+    // Select a random prompt from the array and add variety modifiers
+    let prompt = Array.isArray(categoryPrompts) 
       ? categoryPrompts[Math.floor(Math.random() * categoryPrompts.length)]
       : categoryPrompts;
+    
+    // Add random variety to the prompt for more diverse results
+    prompt = prompt + ` Variation: ${randomPerspective}, ${randomAction}, ${randomSetting}, ${randomExpression}.`;
 
     console.log('Calling AI gateway with prompt:', prompt);
 
