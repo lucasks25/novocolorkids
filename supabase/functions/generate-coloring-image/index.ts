@@ -297,15 +297,20 @@ serve(async (req) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "google/gemini-2.5-flash-image",
+            model: "google/gemini-2.5-flash-image-preview",
             messages: [
               {
-                role: "system",
-                content: "You are a specialist in creating BLACK AND WHITE coloring pages for children. You MUST create images with ONLY pure black lines on pure white background. NEVER use colors, gray tones, or shading. Only solid black outlines. This is CRITICAL - the children need to color the images themselves."
-              },
-              {
                 role: "user",
-                content: prompt + " REMINDER: Create ONLY black and white line art. NO colors, NO gray, NO shading - only pure black lines on white background!"
+                content: `CRITICAL INSTRUCTIONS - READ CAREFULLY:
+You MUST create a BLACK AND WHITE coloring page ONLY.
+- Use ONLY pure black lines (#000000) on pure white background (#FFFFFF)
+- NO colors, NO shading, NO gray tones, NO textures
+- ONLY solid black outlines for children to color
+- This is a COLORING BOOK page - it must be completely uncolored
+
+${prompt}
+
+FINAL REMINDER: The output MUST be black and white line art only. If you add any colors, shading, or gray tones, the image will be rejected.`
               }
             ],
             modalities: ["image", "text"]
