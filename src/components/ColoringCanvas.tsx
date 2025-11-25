@@ -352,6 +352,22 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
   const handleFinish = () => {
     setIsFinished(true);
     
+    // Mensagens de validação carinhosas e incentivadoras
+    const validationMessages = [
+      "Uau! Esse desenho ficou incrível! Você é um artista de verdade! 🌟",
+      "Que cores lindas você escolheu! Parabéns, pequeno gênio! 🎨",
+      "Você é um artista nato! Esse desenho está mágico! ✨",
+      "Que capricho! Seu desenho está digno de um museu! 🏆",
+      "Amei as cores que você usou! Continue assim, artista! 💖",
+      "Olha só que maravilha você criou! Estou muito orgulhoso(a)! 🌈",
+      "Seu talento brilha mais que as estrelas! Lindo demais! ⭐",
+      "Que criatividade incrível! Você arrasou! 🎉",
+      "Este desenho merece ir para a geladeira! Obra-prima! 🏅",
+      "Você coloriu com tanto amor! Ficou perfeito! 💝"
+    ];
+    
+    const randomMessage = validationMessages[Math.floor(Math.random() * validationMessages.length)];
+    
     // Tocar som de aplausos
     const applauseSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3');
     applauseSound.play().catch(err => console.log('Audio play failed:', err));
@@ -385,7 +401,14 @@ export const ColoringCanvas = ({ imageUrl }: ColoringCanvasProps) => {
     // Dispatch event for achievement system
     window.dispatchEvent(new CustomEvent('drawingCompleted'));
     
-    toast.success("🎉 Parabéns! Que desenho lindo!");
+    // Mostrar mensagem de validação carinhosa
+    toast.success(randomMessage, {
+      duration: 5000,
+      style: {
+        fontSize: '1.1rem',
+        padding: '16px',
+      }
+    });
   };
 
   const handleToggleFullscreen = () => {
